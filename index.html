@@ -1,511 +1,1352 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 <meta name="theme-color" content="#0a1426">
-<title>TOP-BET | SIR INNOCENT TECH</title>
-
+<title>TOP-BET · PLAY-MONEY | SIR INNOCENT TECH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a1426;
-  --panel:#17243a;
-  --line:#263b59;
-  --muted:#91a1ba;
-  --green:#10b96b;
-  --orange:#ff6b00;
-  --white:#f5f7fb;
+  --bg:#0a1426; --panel:#17243a; --line:#263b59;
+  --muted:#91a1ba; --green:#10b96b; --green-deep:#0a8a52;
+  --orange:#ff6b00; --purple:#7C3AED; --gold:#F5C542;
+  --red:#EF4444; --white:#f5f7fb;
+  color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--white);
-  padding-bottom:80px;
-}
-button,input{font:inherit}
-button{cursor:pointer}
+html,body{background:var(--bg);color:var(--white);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden}
+body{padding-bottom:80px;min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+a{color:inherit}
+.hidden{display:none!important}
+
+/* ---------- Demo banner ---------- */
 .demo{
-  background:linear-gradient(90deg,#162c49,#65ad46);
-  text-align:center;padding:8px;
-  font-size:10px;font-weight:bold;
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(90deg,#162c49,#65ad46,#7C3AED);
+  text-align:center;padding:7px 10px;
+  font-size:10px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;
 }
+
+/* ---------- Header ---------- */
 header{
   background:linear-gradient(100deg,#17304c,#152d45,#70b94b);
-  padding:16px;display:flex;
+  padding:14px 16px;display:flex;
   justify-content:space-between;align-items:center;
 }
-.brand{font-size:23px;font-weight:900}
+.brand{font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:900;letter-spacing:-.01em}
 .brand span{color:#a8e881}
-.btn{
-  border:0;border-radius:8px;
-  padding:10px 14px;font-weight:bold;
-}
-.download{background:white;color:#387a3d}
-.deposit{background:var(--green);color:white}
+.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:700;font-size:13px;transition:transform .15s,background .2s}
+.btn:active{transform:scale(.97)}
+.download{background:#fff;color:#387a3d}
+.chipBtn{background:var(--green);color:#fff}
+
+/* ---------- Top actions ---------- */
 .top-actions{
   display:flex;justify-content:flex-end;
-  align-items:center;gap:9px;padding:14px 16px;
+  align-items:center;gap:8px;padding:12px 16px;
+  flex-wrap:wrap;
 }
 .balance{
-  padding:10px;background:var(--panel);
+  padding:9px 12px;background:var(--panel);
   border:1px solid var(--line);border-radius:9px;
+  font-size:13px;
 }
+.balance b{color:var(--gold);font-family:'Space Grotesk',sans-serif}
 .profile-wrap{position:relative}
 .profile{
-  background:var(--panel);color:white;
+  background:var(--panel);color:#fff;
   border:1px solid var(--line);
-  padding:10px;border-radius:9px;
+  width:40px;height:40px;border-radius:9px;
+  display:grid;place-items:center;
 }
 .menu{
-  display:none;position:absolute;right:0;top:45px;
-  background:#202f46;width:210px;z-index:20;
+  display:none;position:absolute;right:0;top:46px;
+  background:#202f46;min-width:210px;z-index:60;
   border:1px solid var(--line);border-radius:12px;
-  overflow:hidden;
+  overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.6);
 }
 .menu.open{display:block}
 .menu button{
   display:block;width:100%;text-align:left;
-  border:0;background:none;color:white;padding:14px;
+  border:0;background:none;color:#fff;padding:13px 15px;font-size:13px;
 }
 .menu button:hover{background:#30435d}
+
+/* ---------- Chips row ---------- */
 .sports,.filters{
   display:flex;gap:7px;overflow-x:auto;
-  padding:0 16px 12px;
+  padding:0 16px 12px;scrollbar-width:none;
 }
+.sports::-webkit-scrollbar,.filters::-webkit-scrollbar,.game-strip::-webkit-scrollbar{display:none}
 .sports button,.filters button{
   flex-shrink:0;background:var(--panel);
   color:#dce5f1;border:1px solid var(--line);
-  border-radius:9px;padding:11px;
+  border-radius:9px;padding:10px 13px;font-size:13px;font-weight:500;
 }
 .sports button.active,.filters button.active{
-  background:#173a3a;border-color:var(--green);
-  color:#6ce6ae;
+  background:#173a3a;border-color:var(--green);color:#6ce6ae;
 }
-.search{padding:0 16px 14px}
+
+/* ---------- Search ---------- */
+.search{padding:0 16px 14px;display:flex;gap:8px}
 .search input{
-  width:100%;padding:13px;border-radius:10px;
-  border:1px solid var(--line);
-  background:var(--panel);color:white;outline:none;
+  flex:1;width:100%;padding:13px;border-radius:10px;
+  border:1px solid var(--line);background:var(--panel);color:#fff;outline:none;font-size:15px;
 }
 .search input:focus{border-color:var(--green)}
-.section{padding:0 16px;margin-bottom:17px}
-.section-title{font-weight:bold;margin-bottom:10px}
-.game-strip{
-  display:flex;gap:10px;overflow-x:auto;
-  scrollbar-width:none;
-}
-.game{flex:0 0 64px;text-align:center;cursor:pointer}
+
+/* ---------- Sections ---------- */
+.section{padding:0 16px;margin-bottom:18px}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.section-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+
+/* ---------- Game strip ---------- */
+.game-strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.game{flex:0 0 68px;text-align:center;cursor:pointer;background:none;border:0;padding:0}
 .game-icon{
-  height:55px;border-radius:11px;
-  display:grid;place-items:center;font-size:27px;
+  height:60px;border-radius:12px;
+  display:grid;place-items:center;font-size:28px;
   background:linear-gradient(145deg,#3c174a,#101c32);
-  border:1px solid #ffffff18;
+  border:1px solid rgba(255,255,255,.09);
+  transition:transform .15s,box-shadow .2s;
 }
-.game:nth-child(even) .game-icon{
-  background:linear-gradient(145deg,#126e71,#17223b);
-}
-.game-name{
-  font-size:10px;color:#c1cbd9;
-  margin-top:6px;white-space:nowrap;
-}
+.game:hover .game-icon{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 18px rgba(245,197,66,.25)}
+.game:nth-child(even) .game-icon{background:linear-gradient(145deg,#126e71,#17223b)}
+.game:nth-child(3n) .game-icon{background:linear-gradient(145deg,#3a2a55,#122a1f)}
+.game-name{font-size:10.5px;color:#c1cbd9;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- Promo ---------- */
 .promo{
-  margin:14px 16px;
-  padding:17px;border-radius:14px;
+  margin:14px 16px;padding:16px;border-radius:14px;
   background:linear-gradient(105deg,#ff7b00,#ff4b00);
-  display:flex;align-items:center;gap:13px;
+  display:flex;align-items:center;gap:12px;
 }
-.promo-icon{font-size:30px}
-.promo strong{display:block;margin-bottom:6px}
+.promo-icon{font-size:28px}
+.promo strong{display:block;margin-bottom:4px;font-family:'Space Grotesk',sans-serif}
 .promo span{font-size:11px;color:#ffe6d5}
+
+/* ---------- Fixture cards ---------- */
+.fixture-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 16px;margin-bottom:10px;font-size:12px;color:var(--muted);
+}
+.fixture-bar b{color:var(--gold)}
 .match{
-  background:var(--panel);
-  border:1px solid var(--line);
+  background:var(--panel);border:1px solid var(--line);
   border-radius:13px;overflow:hidden;
-  margin:0 16px 12px;
+  margin:0 16px 12px;position:relative;
 }
 .match-head{
-  display:flex;justify-content:space-between;
-  gap:10px;padding:12px;
-  border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:10px;
+  padding:11px 13px;border-bottom:1px solid var(--line);
+  background:rgba(0,0,0,.12);
 }
-.league{font-size:11px;color:#b8c6d8}
-.time{font-size:11px;color:var(--muted);margin-top:6px}
-.markets{font-size:11px;color:#27c879}
+.league{font-size:11px;color:#b8c6d8;display:flex;align-items:center;gap:6px}
+.sample-tag{
+  font-size:9px;font-weight:700;letter-spacing:.08em;
+  background:rgba(124,58,237,.25);color:#c4b5fd;
+  padding:2px 6px;border-radius:4px;
+}
+.time{font-size:11px;color:var(--muted);margin-top:4px}
+.markets{font-size:11px;color:#27c879;text-align:right;flex-shrink:0}
 .match-body{
   display:grid;grid-template-columns:1fr auto;
-  gap:8px;align-items:center;padding:13px;
+  gap:10px;align-items:center;padding:13px;
 }
-.teams{font-size:12px;font-weight:bold;line-height:2}
+.teams{font-size:12.5px;font-weight:700;line-height:1.9;min-width:0}
 .odds{display:flex;gap:5px}
 .odd{
-  min-width:48px;padding:13px 6px;
+  min-width:48px;padding:12px 6px;
   background:#192941;border:1px solid #2a405f;
-  border-radius:8px;color:white;font-weight:bold;
+  border-radius:8px;color:#fff;font-weight:700;font-size:13px;
+  transition:background .15s,border-color .15s;
 }
-.odd.selected{
-  background:#176744;border-color:#27c879;
+.odd:hover{background:#1f3450;border-color:#3a5578}
+.odd.selected{background:#176744;border-color:#27c879}
+.odd small{display:block;font-size:8px;font-weight:500;color:var(--muted);margin-top:2px}
+
+.loadMore{
+  display:block;width:calc(100% - 32px);margin:4px 16px 16px;
+  padding:13px;border-radius:10px;border:1px dashed var(--line);
+  background:rgba(255,255,255,.02);color:var(--muted);
+  font-size:13px;font-weight:600;
 }
-.empty{display:none;text-align:center;padding:25px;color:var(--muted)}
+.loadMore:hover{background:rgba(255,255,255,.05);color:#fff}
+
+.empty{display:none;text-align:center;padding:30px 20px;color:var(--muted);font-size:13px}
+
+/* ---------- Bottom nav ---------- */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
-  height:68px;background:#0b172a;
+  height:64px;background:#0b172a;
   border-top:1px solid var(--line);
   display:flex;justify-content:space-around;
-  align-items:center;z-index:10;
+  align-items:center;z-index:40;
+  padding-bottom:env(safe-area-inset-bottom);
 }
 .nav-item{
   background:none;border:0;color:#91a1ba;
   display:flex;flex-direction:column;
-  align-items:center;gap:5px;font-size:10px;
+  align-items:center;gap:4px;font-size:10px;
+  padding:6px 8px;flex:1;max-width:90px;
 }
-.nav-item .ico{font-size:20px}
+.nav-item .ico{font-size:19px}
 .nav-item.active{color:#24c77a}
+
+/* ---------- Toast ---------- */
 .toast{
-  display:none;position:fixed;z-index:50;
-  bottom:85px;left:50%;transform:translateX(-50%);
+  display:none;position:fixed;z-index:80;
+  bottom:80px;left:50%;transform:translateX(-50%);
   background:#26364c;border:1px solid #3c526e;
-  padding:12px 16px;border-radius:10px;
+  padding:11px 16px;border-radius:10px;
   width:max-content;max-width:90%;text-align:center;
+  font-size:13px;font-weight:500;
+  box-shadow:0 8px 30px rgba(0,0,0,.6);
 }
-.toast.show{display:block}
+.toast.show{display:block;animation:toastIn .25s ease}
+.toast.win{border-color:rgba(16,185,129,.5)}
+.toast.lose{border-color:rgba(239,68,68,.5)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ---------- Footer ---------- */
 footer{
-  text-align:center;padding:20px;
-  color:#91a1ba;font-size:10px;
+  text-align:center;padding:24px 20px 40px;
+  color:var(--muted);font-size:11px;line-height:1.7;
 }
+footer .brandFoot{color:rgba(255,255,255,.8);font-weight:700;font-family:'Space Grotesk',sans-serif;margin-bottom:4px}
+footer .disclaimer{
+  max-width:420px;margin:14px auto 0;padding:11px 14px;
+  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);
+  border-radius:10px;font-size:10.5px;color:#c4b5fd;
+}
+
+/* ---------- Modal (games) ---------- */
+.modal{
+  position:fixed;inset:0;background:rgba(7,10,20,.88);
+  backdrop-filter:blur(6px);z-index:90;
+  display:none;align-items:center;justify-content:center;
+  padding:12px;
+}
+.modal.open{display:flex;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.panel{
+  width:100%;max-width:460px;background:#0f1a2e;
+  border:1px solid rgba(255,255,255,.1);border-radius:20px;
+  padding:16px;max-height:94vh;overflow-y:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.7);
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+.panel .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.panel .head h3{font-family:'Space Grotesk',sans-serif;font-size:17px}
+.panel .head button{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:0;color:#fff;font-size:18px;
+}
+
+/* Game sub-controls */
+.stake-row{display:flex;gap:8px;margin-top:10px}
+.stake-row input{
+  flex:1;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  color:#fff;border-radius:11px;
+  padding:11px 13px;font-size:16px;
+}
+.chip-row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.chip{
+  flex:1;min-width:56px;padding:8px 0;
+  border-radius:9px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.7);font-size:12px;font-weight:600;
+  text-align:center;transition:all .15s;
+}
+.chip:hover{background:rgba(255,255,255,.1)}
+.chip.active{background:rgba(245,197,66,.2);border-color:rgba(245,197,66,.5);color:var(--gold)}
+.game-btn{
+  width:100%;margin-top:12px;padding:13px;
+  border:0;border-radius:12px;
+  background:linear-gradient(90deg,var(--gold),var(--green),var(--purple));
+  color:#0B0B0F;font-weight:700;font-size:14px;letter-spacing:.03em;
+  transition:box-shadow .25s;
+}
+.game-btn:hover{box-shadow:0 0 24px rgba(245,197,66,.4)}
+.game-btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.game-btn.cashout{background:linear-gradient(90deg,var(--green),#059669);color:#fff}
+.game-btn.cashout:disabled{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35)}
+.action-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.action-2col .game-btn{margin-top:0}
+
+/* Rocket stage */
+.rocket-stage{
+  position:relative;height:210px;border-radius:16px;
+  background:radial-gradient(circle at 50% 50%,#1a1030,#07070A 80%);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.multiplier{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;pointer-events:none;z-index:3;
+}
+.multiplier .num{
+  font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;
+  color:#fff;text-shadow:0 0 24px rgba(245,197,66,.55);line-height:1;
+  transition:color .2s;
+}
+.multiplier.crashed .num{color:var(--red);text-shadow:0 0 24px rgba(239,68,68,.7)}
+.multiplier .state{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-top:8px;
+}
+.rocket-emoji{
+  position:absolute;font-size:32px;
+  transform:translate(-50%,-50%);
+  transition:left .08s linear,top .08s linear;
+  filter:drop-shadow(0 0 12px rgba(245,197,66,.8));
+  z-index:2;
+}
+.curve-svg{position:absolute;inset:0;width:100%;height:100%}
+.curve-path{fill:none;stroke-width:3;stroke-linecap:round}
+.curve-fill{opacity:.35}
+
+/* Dice / coin / spin visual */
+.game-visual{
+  display:flex;justify-content:center;align-items:center;
+  gap:24px;padding:24px 0;
+}
+.game-visual .die{font-size:56px;line-height:1}
+.game-visual .die-lbl{font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;letter-spacing:.1em}
+.center-emoji{font-size:64px;text-align:center;padding:20px 0}
+.result-line{
+  text-align:center;font-weight:700;font-size:14px;
+  min-height:20px;margin:6px 0 4px;
+}
+.hist-row{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+
+/* Keno grid */
+.keno-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:5px;
+  margin:10px 0;
+}
+.keno-grid button{
+  aspect-ratio:1;border-radius:8px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);color:#fff;font-weight:600;font-size:12px;
+  transition:all .15s;
+}
+.keno-grid button.picked{background:rgba(124,58,237,.35);border-color:rgba(124,58,237,.7)}
+.keno-grid button.drawn{border-color:rgba(245,197,66,.85);box-shadow:0 0 10px rgba(245,197,66,.5)}
+.keno-grid button.match{background:rgba(16,185,129,.35);border-color:rgba(16,185,129,.8)}
+
+/* Color prediction ball */
+.color-ball-wrap{display:flex;justify-content:center;margin:20px 0}
+.color-ball{
+  width:84px;height:84px;border-radius:20px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  display:grid;place-items:center;font-size:38px;
+  transition:all .3s;
+}
+
+/* Media */
 @media(min-width:700px){
-  body{max-width:1000px;margin:auto}
-  .match{margin-left:16px;margin-right:16px}
+  body{max-width:1000px;margin:0 auto}
 }
 @media(max-width:390px){
-  .odd{min-width:42px;padding:12px 4px}
-  .teams{font-size:11px}
+  .odd{min-width:44px;padding:11px 4px;font-size:12px}
+  .teams{font-size:11.5px}
   .brand{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
 
-<div class="demo">
-⚠ PLAY-MONEY DEMO · NO REAL DEPOSITS OR WITHDRAWALS · 18+
-</div>
+<!-- ============ DEMO BANNER ============ -->
+<div class="demo">⚠ Play-money demo · fictional teams &amp; sample odds · no real betting · 18+</div>
 
+<!-- ============ HEADER ============ -->
 <header>
   <div class="brand">TOP<span>-BET</span></div>
-  <button class="btn download" id="downloadBtn">Download</button>
+  <button class="btn download" id="downloadBtn">Get App</button>
 </header>
 
+<!-- ============ TOP ACTIONS ============ -->
 <div class="top-actions">
-  <div class="balance">KES <b id="balance">500</b></div>
-  <button class="btn deposit" id="depositBtn">Deposit</button>
+  <div class="balance">Play Balance: <b id="balance">KES 500.00</b></div>
+  <button class="btn chipBtn" id="chipBtn">+ Add Play Chips</button>
 
   <div class="profile-wrap">
-    <button class="profile" id="profileBtn">♙</button>
-
+    <button class="profile" id="profileBtn" aria-label="Menu">☰</button>
     <div class="menu" id="profileMenu">
-      <button data-action="deposit">💰 Demo Deposit</button>
-      <button data-action="withdraw">💸 Withdraw</button>
-      <button data-action="failed">📱 Failed deposit?</button>
-      <button data-action="transactions">💳 Transactions</button>
-      <button data-action="bets">🎟 My Bets</button>
+      <button data-action="chips">🎰 Add Play Chips</button>
+      <button data-action="withdraw">💸 Withdraw (demo)</button>
+      <button data-action="failed">📱 Report Issue</button>
+      <button data-action="transactions">💳 Play History</button>
+      <button data-action="bets">🎟 My Bets (demo)</button>
       <button data-action="profile">👤 Profile</button>
-      <button data-action="refer">🎁 Refer & Earn</button>
-      <button data-action="logout">🚪 Clear Demo Session</button>
+      <button data-action="refer">🎁 Refer &amp; Earn</button>
+      <button data-action="reset">♻ Reset Demo</button>
     </div>
   </div>
 </div>
 
+<!-- ============ SPORTS FILTERS ============ -->
 <nav class="sports" id="sports">
-  <button class="active">⚽ Football</button>
-  <button>🎮 Virtual</button>
-  <button>🏀 Basketball</button>
-  <button>🎾 Tennis</button>
-  <button>🏉 Rugby</button>
-  <button>🏏 Cricket</button>
+  <button class="active" data-sport="football">⚽ Football</button>
+  <button data-sport="virtual">🎮 Virtual</button>
+  <button data-sport="basketball">🏀 Basketball</button>
+  <button data-sport="tennis">🎾 Tennis</button>
+  <button data-sport="rugby">🏉 Rugby</button>
+  <button data-sport="cricket">🏏 Cricket</button>
 </nav>
 
+<!-- ============ SEARCH ============ -->
 <div class="search">
-  <input id="search" placeholder="⌕ Search teams, leagues..." autocomplete="off">
+  <input id="search" placeholder="⌕ Search sample teams, leagues..." autocomplete="off">
 </div>
 
+<!-- ============ PLAY GAMES (WORKING) ============ -->
 <section class="section">
-  <div class="section-title">Games</div>
+  <div class="section-head">
+    <div class="section-title">🎮 Play Games <span style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:.1em;">· LIVE DEMO</span></div>
+  </div>
   <div class="game-strip">
-    <div class="game" data-game="Aviator"><div class="game-icon">🛩️</div><div class="game-name">Aviator</div></div>
-    <div class="game" data-game="Bazooka"><div class="game-icon">🚀</div><div class="game-name">Bazooka</div></div>
-    <div class="game" data-game="Avionix"><div class="game-icon">✈️</div><div class="game-name">Avionix</div></div>
-    <div class="game" data-game="JetX"><div class="game-icon">🛸</div><div class="game-name">JetX</div></div>
-    <div class="game" data-game="Crash"><div class="game-icon">💥</div><div class="game-name">Crash</div></div>
-    <div class="game" data-game="Lucky Spin"><div class="game-icon">🎰</div><div class="game-name">Lucky Spin</div></div>
-    <div class="game" data-game="Aviator Pro"><div class="game-icon">🪂</div><div class="game-name">Aviator Pro</div></div>
+    <button class="game" data-game="rocket"><div class="game-icon">🚀</div><div class="game-name">Rocket Fly</div></button>
+    <button class="game" data-game="dice"><div class="game-icon">🎲</div><div class="game-name">Dice Duel</div></button>
+    <button class="game" data-game="coin"><div class="game-icon">🪙</div><div class="game-name">Coin Flip</div></button>
+    <button class="game" data-game="spin"><div class="game-icon">🎰</div><div class="game-name">Lucky Spin</div></button>
+    <button class="game" data-game="color"><div class="game-icon">🎨</div><div class="game-name">Color Call</div></button>
+    <button class="game" data-game="keno"><div class="game-icon">🔢</div><div class="game-name">Mini Keno</div></button>
+    <button class="game" data-game="highlow"><div class="game-icon">🃏</div><div class="game-name">High-Low</div></button>
+    <button class="game" data-game="wheel"><div class="game-icon">🎡</div><div class="game-name">Prize Wheel</div></button>
   </div>
 </section>
 
+<!-- ============ PROMO ============ -->
 <div class="promo">
   <div class="promo-icon">🎁</div>
   <div>
     <strong>10% Daily Cashback</strong>
-    <span>real money or prizes</span>
+    <span>Demo promotion · play-money only · no real prizes</span>
   </div>
 </div>
 
-<section class="section">
-  <div class="section-title">🎰 Casino</div>
-  <div class="game-strip">
-    <div class="game" data-game="Aztec Gems"><div class="game-icon">💎</div><div class="game-name">Aztec Gems</div></div>
-    <div class="game" data-game="Dice Duel"><div class="game-icon">🎲</div><div class="game-name">Dice Duel</div></div>
-    <div class="game" data-game="Bonus Mania"><div class="game-icon">🎉</div><div class="game-name">Bonus Mania</div></div>
-    <div class="game" data-game="888 Gold"><div class="game-icon">🪙</div><div class="game-name">888 Gold</div></div>
-    <div class="game" data-game="Sweet Bonanza"><div class="game-icon">🍬</div><div class="game-name">Sweet Bonanza</div></div>
-    <div class="game" data-game="Gates of Olympus"><div class="game-icon">⚡</div><div class="game-name">Gates of Olympus</div></div>
-    <div class="game" data-game="Starlight"><div class="game-icon">🌟</div><div class="game-name">Starlight</div></div>
-  </div>
-</section>
-
-<div class="filters">
-  <button class="active" data-filter="Highlights">Highlights</button>
-  <button data-filter="Upcoming">Upcoming</button>
-  <button data-filter="Today">Today</button>
-  <button data-filter="Leagues">⚑ Leagues</button>
-</div>
-
-<div class="filters">
-  <button class="active">1×2 / Winner</button>
-  <button>Double Chance</button>
-  <button>Both Teams</button>
-  <button>Half-time Result</button>
-  <button>Draw No Bet</button>
+<!-- ============ SAMPLE FIXTURES ============ -->
+<div class="fixture-bar">
+  <div>Sample fixtures: <b id="fixtureCount">0</b> shown</div>
+  <div style="font-size:10px;opacity:.6;">Fictional clubs · sample odds</div>
 </div>
 
 <main id="matches">
-
-  <article class="match" data-teams="Paris Saint-Germain FC Barcelona">
-    <div class="match-head">
-      <div>
-        <div class="league">UEFA Champions League</div>
-        <div class="time">◷ Today · Sample fixture</div>
-      </div>
-      <div class="markets">+178 Markets ›</div>
-    </div>
-    <div class="match-body">
-      <div class="teams">Paris Saint-Germain<br>FC Barcelona</div>
-      <div class="odds">
-        <button class="odd" data-odd="2.46">2.46</button>
-        <button class="odd" data-odd="4.40">4.40</button>
-        <button class="odd" data-odd="2.46">2.46</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="match" data-teams="VfB Stuttgart Atletico Madrid">
-    <div class="match-head">
-      <div>
-        <div class="league">UEFA Champions League</div>
-        <div class="time">◷ Sample fixture</div>
-      </div>
-      <div class="markets">+172 Markets ›</div>
-    </div>
-    <div class="match-body">
-      <div class="teams">VfB Stuttgart<br>Atletico Madrid</div>
-      <div class="odds">
-        <button class="odd" data-odd="3.50">3.50</button>
-        <button class="odd" data-odd="4.00">4.00</button>
-        <button class="odd" data-odd="1.98">1.98</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="match" data-teams="SSC Napoli Bodo Glimt">
-    <div class="match-head">
-      <div>
-        <div class="league">UEFA Champions League</div>
-        <div class="time">◷ Sample fixture</div>
-      </div>
-      <div class="markets">+174 Markets ›</div>
-    </div>
-    <div class="match-body">
-      <div class="teams">SSC Napoli<br>Bodø/Glimt</div>
-      <div class="odds">
-        <button class="odd" data-odd="1.73">1.73</button>
-        <button class="odd" data-odd="4.10">4.10</button>
-        <button class="odd" data-odd="4.60">4.60</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="match" data-teams="Liverpool Villarreal">
-    <div class="match-head">
-      <div>
-        <div class="league">UEFA Champions League</div>
-        <div class="time">◷ Sample fixture</div>
-      </div>
-      <div class="markets">+173 Markets ›</div>
-    </div>
-    <div class="match-body">
-      <div class="teams">Liverpool FC<br>Villarreal CF</div>
-      <div class="odds">
-        <button class="odd" data-odd="1.48">1.48</button>
-        <button class="odd" data-odd="5.00">5.00</button>
-        <button class="odd" data-odd="6.00">6.00</button>
-      </div>
-    </div>
-  </article>
-
-  <div class="empty" id="empty">No matches found. Try another team name.</div>
+  <div class="empty" id="empty">No fixtures match your search.</div>
 </main>
+<button class="loadMore" id="loadMore">Show more sample fixtures ↓</button>
 
+<!-- ============ FOOTER ============ -->
 <footer>
-  © 2026 TOP-BET · SIR INNOCENT TECH<br><br>
-  Play-money only.  real betting services are connected.
+  <div class="brandFoot">© 2026 TOP-BET · SIR INNOCENT TECH</div>
+  <div>Powered by CHARLIE · Built with ⚡ technology</div>
+  <div class="disclaimer">
+    This is a play-money demonstration. All teams, leagues, and odds are fictional sample data.
+    No real deposits, withdrawals, or betting services are connected. Not a licensed sportsbook.
+  </div>
 </footer>
 
+<!-- ============ BOTTOM NAV ============ -->
 <nav class="bottom-nav">
   <button class="nav-item active" data-nav="Home"><span class="ico">⌂</span>Home</button>
-  <button class="nav-item" data-nav="Casino"><span class="ico">🎮</span>Casino</button>
-  <button class="nav-item" data-nav="Games"><span class="ico">●</span>Games</button>
-  <button class="nav-item" data-nav="Live"><span class="ico">▣</span>Live</button>
-  <button class="nav-item" data-nav="My Bets"><span class="ico">▤</span>My Bets</button>
+  <button class="nav-item" data-nav="Games"><span class="ico">🎮</span>Games</button>
+  <button class="nav-item" data-nav="Fixtures"><span class="ico">▣</span>Fixtures</button>
+  <button class="nav-item" data-nav="History"><span class="ico">▤</span>History</button>
+  <button class="nav-item" data-nav="Menu"><span class="ico">☰</span>Menu</button>
 </nav>
 
+<!-- ============ TOAST ============ -->
 <div class="toast" id="toast"></div>
 
+<!-- ============ GAME MODAL ============ -->
+<div class="modal" id="modal">
+  <div class="panel">
+    <div class="head">
+      <h3 id="gameTitle">Game</h3>
+      <button id="closeModal" aria-label="Close">×</button>
+    </div>
+    <div id="gameBody"></div>
+  </div>
+</div>
+
 <script>
-(() => {
-  "use strict";
+(function(){
+'use strict';
 
-  const $ = id => document.getElementById(id);
-  let balance = 500;
-  let toastTimer;
+/* ============================================================
+   STATE
+   ============================================================ */
+const START_BALANCE = 500;
+let balance = START_BALANCE;
+const playLog = [];  // session plays
 
-  function toast(message) {
-    const box = $("toast");
-    box.textContent = message;
-    box.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => box.classList.remove("show"), 2500);
-  }
+const $ = id => document.getElementById(id);
 
-  $("profileBtn").addEventListener("click", () => {
-    $("profileMenu").classList.toggle("open");
-  });
+function fmt(n){
+  return Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function updateBalance(){
+  $('balance').textContent = 'KES ' + fmt(balance);
+}
 
-  document.addEventListener("click", event => {
-    if (!event.target.closest(".profile-wrap")) {
-      $("profileMenu").classList.remove("open");
+let toastTimer;
+function toast(msg, kind){
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (kind||'');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ t.className='toast '+(kind||''); }, 2400);
+}
+
+function logPlay(label, delta){
+  playLog.unshift({label, delta, at:new Date()});
+  if(playLog.length > 40) playLog.length = 40;
+}
+
+/* ============================================================
+   PROFILE MENU
+   ============================================================ */
+$('profileBtn').addEventListener('click', e=>{
+  e.stopPropagation();
+  $('profileMenu').classList.toggle('open');
+});
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.profile-wrap')) $('profileMenu').classList.remove('open');
+});
+
+$('profileMenu').querySelectorAll('button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    const a = b.dataset.action;
+    $('profileMenu').classList.remove('open');
+    if(a === 'chips'){
+      balance += 1000; updateBalance();
+      toast('+1,000 demo play chips added');
+    } else if(a === 'reset'){
+      balance = START_BALANCE; playLog.length = 0; updateBalance();
+      toast('Demo reset to KES 500');
+    } else if(a === 'withdraw'){
+      toast('Withdrawals are not connected in this demo');
+    } else if(a === 'transactions'){
+      if(playLog.length===0){ toast('No plays yet this session'); return; }
+      const last = playLog.slice(0,5).map(p=>{
+        const s = p.delta>=0?'+':'';
+        return p.label+' · '+s+fmt(p.delta);
+      }).join('\n');
+      toast('Recent: '+last);
+    } else if(a === 'bets'){
+      toast('No real bets exist in this demo');
+    } else if(a === 'profile'){
+      toast('Demo profile · play-money only');
+    } else if(a === 'refer'){
+      toast('Referral rewards are not enabled in demo');
+    } else if(a === 'failed'){
+      toast('Report issues at support@sirinnocent.tech (demo)');
     }
   });
+});
 
-  $("depositBtn").addEventListener("click", () => {
-    toast("Demo only. Real deposits are not available.");
+$('chipBtn').addEventListener('click', ()=>{
+  balance += 1000; updateBalance();
+  toast('+1,000 demo play chips added');
+});
+
+$('downloadBtn').addEventListener('click', ()=>{
+  toast('App download link not configured in demo');
+});
+
+/* ============================================================
+   SAMPLE FIXTURE GENERATOR (fictional teams)
+   ============================================================ */
+const FICTIONAL_CLUBS = [
+  'Nairobi United','Mombasa Stars','Kisumu Rangers','Eldoret City','Nakuru FC',
+  'Coast Athletic','Rift Valley FC','Thika Warriors','Machakos United','Kericho FC',
+  'Lagos Lions','Abuja Eagles','Accra Titans','Kampala Kickers','Dar Royals',
+  'Cairo Phoenix','Casablanca Kings','Tunis Falcons','Algiers Lions','Marrakesh SC',
+  'Kigali Rangers','Bujumbura Stars','Lusaka Warriors','Harare United','Gaborone FC',
+  'Windhoek City','Maputo Sharks','Luanda Dynamos','Kinshasa Leopards','Dakar Lions',
+  'Abidjan Panthers','Bamako FC','Ouagadougou United','Niamey Athletic','Conakry Stars',
+  'Monrovia City','Freetown Rangers','Banjul FC','Bissau United','Praia Warriors',
+  'London Atlas','Manchester Vale','Liverpool Bay','Birmingham Pride','Newcastle North',
+  'Sheffield Union','Leeds Rovers','Nottingham Forest FC','Derby County AFC','Bristol City FC',
+  'Parisian Union','Lyon Royals','Marseille Coast','Bordeaux FC','Toulouse Athletic',
+  'Madrid Sol','Barcelona Coast','Sevilla Union','Valencia CF','Bilbao Athletic',
+  'Munich Adler','Berlin Union','Hamburg Nord','Frankfurt FC','Dortmund West',
+  'Milan Nord','Roma Capitals','Napoli Bay','Torino FC','Florence Viola',
+  'Amsterdam Ajax FC','Rotterdam United','Eindhoven PSV','Utrecht FC','Bruges Club',
+  'Lisbon Benfica FC','Porto Coastal','Braga SC','Rio Flamengo FC','Sao Paulo FC',
+  'Buenos Aires Boca','Montevideo Penarol','Santiago Colo','Lima Alianza','Bogota Millonarios',
+  'Mexico City America','Guadalajara Chivas','Toronto FC','Vancouver Whitecaps','Montreal Impact',
+  'New York Red Bulls','Los Angeles Galaxy','Seattle Sounders','Portland Timbers','Miami Union',
+  'Tokyo FC','Seoul United','Beijing Guoan','Shanghai SIPG','Guangzhou Evergrande',
+  'Sydney FC','Melbourne Victory','Auckland City','Wellington Phoenix','Perth Glory'
+];
+
+const LEAGUES = [
+  'East African Premier','Coastal Championship','Rift Valley Cup','African Continental',
+  'Fictional Champions Series','Sample Europa League','World Sample Cup','Demo Conference',
+  'Atlantic Division','Pacific Division','Desert Classic','Highland League',
+  'Continental Qualifier','Regional Friendly','Demo Super Cup','Island Trophy'
+];
+
+function seededRandom(seed){
+  let s = seed % 2147483647;
+  if(s <= 0) s += 2147483646;
+  return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+}
+const rnd = seededRandom(42);
+
+function pick(arr){ return arr[Math.floor(rnd() * arr.length)]; }
+function price(min, max){
+  return (min + rnd() * (max - min)).toFixed(2);
+}
+function oKey(){ return (1.2 + rnd()*4).toFixed(2); }
+
+// Generate all 2000+ fixtures once
+const ALL_FIXTURES = (function build(){
+  const out = [];
+  const used = new Set();
+  const target = 2100;
+  let attempts = 0;
+  while(out.length < target && attempts < target * 4){
+    attempts++;
+    const home = pick(FICTIONAL_CLUBS);
+    let away = pick(FICTIONAL_CLUBS);
+    if(home === away) continue;
+    const key = home+'|'+away;
+    if(used.has(key)) continue;
+    used.add(key);
+
+    const base = 1.2 + rnd() * 3.5;
+    const draw = 3.0 + rnd() * 1.8;
+    const away = home === away ? pick(FICTIONAL_CLUBS) : away;
+    const oA = base.toFixed(2);
+    const oD = draw.toFixed(2);
+    const oB = (2.5 + rnd() * 4).toFixed(2);
+    const markets = Math.floor(120 + rnd() * 180);
+    const league = pick(LEAGUES);
+
+    out.push({
+      home, away, league,
+      odds: [oA, oD, oB],
+      markets,
+      sport: rnd() < 0.7 ? 'football' : (rnd()<0.5?'basketball':'tennis'),
+      sample: true
+    });
+  }
+  return out;
+})();
+
+/* ============================================================
+   FIXTURE RENDERING
+   ============================================================ */
+let currentSport = 'football';
+let visibleCount = 40;      // initial batch
+const BATCH = 40;
+
+function fixtureHTML(f, idx){
+  const [a,d,b] = f.odds;
+  return `<article class="match" data-idx="${idx}" data-teams="${f.home} ${f.away}" data-sport="${f.sport}">
+    <div class="match-head">
+      <div>
+        <div class="league">${f.league} <span class="sample-tag">SAMPLE</span></div>
+        <div class="time">◷ Upcoming · fictional fixture</div>
+      </div>
+      <div class="markets">+${f.markets} markets ›</div>
+    </div>
+    <div class="match-body">
+      <div class="teams">${f.home}<br>${f.away}</div>
+      <div class="odds">
+        <button class="odd" data-odd="${a}">${a}<small>1</small></button>
+        <button class="odd" data-odd="${d}">${d}<small>X</small></button>
+        <button class="odd" data-odd="${b}">${b}<small>2</small></button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function currentPool(){
+  const q = ($('search').value || '').toLowerCase().trim();
+  let pool = ALL_FIXTURES;
+  if(currentSport !== 'football' && currentSport !== 'virtual'){
+    pool = pool.filter(f => f.sport === currentSport);
+  }
+  if(q){
+    pool = pool.filter(f =>
+      f.home.toLowerCase().includes(q) ||
+      f.away.toLowerCase().includes(q) ||
+      f.league.toLowerCase().includes(q)
+    );
+  }
+  return pool;
+}
+
+function renderFixtures(){
+  const pool = currentPool();
+  const slice = pool.slice(0, visibleCount);
+  const main = $('matches');
+  // remove existing fixture cards, keep empty div
+  main.querySelectorAll('.match').forEach(n => n.remove());
+  main.insertAdjacentHTML('afterbegin', slice.map((f,i)=>fixtureHTML(f,i)).join(''));
+  $('fixtureCount').textContent = slice.length + ' / ' + pool.length;
+  $('empty').style.display = pool.length ? 'none' : 'block';
+  $('loadMore').style.display = slice.length < pool.length ? 'block' : 'none';
+  wireOdds();
+}
+
+function wireOdds(){
+  document.querySelectorAll('.odd').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      btn.closest('.odds').querySelectorAll('.odd').forEach(o=>o.classList.remove('selected'));
+      btn.classList.add('selected');
+      toast('Sample odds '+btn.dataset.odd+' selected · no bet placed');
+    });
   });
+}
 
-  $("downloadBtn").addEventListener("click", () => {
-    toast("Add your app download link here.");
+$('search').addEventListener('input', ()=>{
+  visibleCount = BATCH;
+  renderFixtures();
+});
+
+$('loadMore').addEventListener('click', ()=>{
+  visibleCount += BATCH;
+  renderFixtures();
+});
+
+document.querySelectorAll('#sports button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#sports button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    currentSport = b.dataset.sport;
+    visibleCount = BATCH;
+    renderFixtures();
+    toast(b.textContent.trim().replace(/^[^\s]+\s/,'')+' filter applied');
   });
+});
 
-  $("profileMenu").querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      const action = button.dataset.action;
+renderFixtures();
 
-      if (action === "logout") {
-        toast("Demo session closed.");
-      } else if (action === "deposit" || action === "withdraw") {
-        toast("Real deposits and withdrawals are not connected.");
+/* ============================================================
+   GAME MODAL HELPERS
+   ============================================================ */
+const modal = $('modal');
+const gameBody = $('gameBody');
+const gameTitle = $('gameTitle');
+
+function openModal(title){
+  gameTitle.textContent = title;
+  modal.classList.add('open');
+}
+function closeModal(){
+  if(rocketTimer){ clearInterval(rocketTimer); rocketTimer=null; }
+  modal.classList.remove('open');
+  gameBody.innerHTML = '';
+  updateBalance();
+}
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+$('closeModal').addEventListener('click', closeModal);
+
+function stakeControls(id){
+  return `<div class="stake-row">
+    <input type="number" id="${id}Stake" value="50" min="1" step="1">
+  </div>
+  <div class="chip-row">
+    <div class="chip" data-stake="10">10</div>
+    <div class="chip" data-stake="50">50</div>
+    <div class="chip" data-stake="100">100</div>
+    <div class="chip" data-stake="500">500</div>
+  </div>`;
+}
+function wireChips(scope){
+  scope.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      const inp = scope.querySelector('.stake-row input');
+      if(inp) inp.value = c.dataset.stake;
+      scope.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+}
+function parseStake(id){
+  const v = parseFloat($(id).value);
+  if(!isFinite(v) || v<=0) return null;
+  if(v > balance) return null;
+  return Math.round(v*100)/100;
+}
+
+/* ============================================================
+   GAME 1 — ROCKET FLY
+   ============================================================ */
+let rocketTimer = null;
+let rocketState = { running:false, cashed:false, mult:1, stake:0 };
+
+function renderRocket(){
+  openModal('🚀 Rocket Fly');
+  gameBody.innerHTML = `
+    <div class="rocket-stage" id="rocketStage">
+      <svg class="curve-svg" viewBox="0 0 460 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="cgrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C3AED"/>
+            <stop offset="50%" stop-color="#10B981"/>
+            <stop offset="100%" stop-color="#F5C542"/>
+          </linearGradient>
+          <linearGradient id="agrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7C3AED" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="curve-fill" id="curveFill" fill="url(#agrad)"></path>
+        <path class="curve-path" id="curvePath" stroke="url(#cgrad)"></path>
+      </svg>
+      <div class="rocket-emoji" id="rocketEmoji" style="left:8%;top:85%">🚀</div>
+      <div class="multiplier" id="multWrap">
+        <div class="num" id="multNum">1.00×</div>
+        <div class="state" id="multState">Ready</div>
+      </div>
+    </div>
+    ${stakeControls('rocket')}
+    <div class="action-2col">
+      <button class="game-btn" id="startBtn">🚀 LAUNCH</button>
+      <button class="game-btn cashout" id="cashBtn" disabled>💰 CASH OUT</button>
+    </div>
+    <div class="hist-row" id="rocketHist"></div>
+  `;
+  wireChips(gameBody);
+  $('startBtn').addEventListener('click', launchRocket);
+  $('cashBtn').addEventListener('click', cashOutRocket);
+}
+
+function launchRocket(){
+  const stake = parseStake('rocketStake');
+  if(stake === null){ toast('Enter a valid stake within your balance', 'lose'); return; }
+  balance -= stake; updateBalance();
+
+  rocketState = { running:true, cashed:false, mult:1, stake };
+  const $num = $('multNum'), $state = $('multState'),
+        $rocket = $('rocketEmoji'), $path = $('curvePath'), $fill = $('curveFill'),
+        $start = $('startBtn'), $cash = $('cashBtn');
+
+  $num.textContent = '1.00×';
+  $num.parentElement.classList.remove('crashed');
+  $state.textContent = 'In flight…';
+  $start.disabled = true;
+  $cash.disabled = false;
+  $rocket.style.left='8%'; $rocket.style.top='85%';
+  $path.setAttribute('d','M 0 220'); $fill.setAttribute('d','');
+
+  let mult = 1;
+  const pts = [[0,220]];
+
+  rocketTimer = setInterval(()=>{
+    const step = 0.05 + Math.random()*0.14 + mult*0.006;
+    mult += step;
+    const crashProb = Math.min(0.9, 0.004 * Math.pow(mult, 2.2));
+
+    if(Math.random() < crashProb || mult >= 20){
+      clearInterval(rocketTimer); rocketTimer = null;
+      $num.textContent = mult.toFixed(2)+'×';
+      $num.parentElement.classList.add('crashed');
+      $state.textContent = 'FLEW AWAY';
+      $start.disabled = false;
+      $cash.disabled = true;
+      rocketState.running = false;
+
+      if(!rocketState.cashed){
+        toast('Flew away at '+mult.toFixed(2)+'× · lost KES '+fmt(stake), 'lose');
+        logPlay('Rocket · flew at '+mult.toFixed(2)+'×', -stake);
+      }
+      return;
+    }
+
+    $num.textContent = mult.toFixed(2)+'×';
+    rocketState.mult = mult;
+
+    const x = Math.min(88, 8 + (mult-1)*4.5);
+    const y = Math.max(12, 85 - (mult-1)*5.5);
+    $rocket.style.left = x+'%';
+    $rocket.style.top = y+'%';
+
+    pts.push([x*4.6, y*2.2]);
+    if(pts.length>200) pts.shift();
+    const d = pts.map((p,i)=>(i===0?'M ':'L ')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    $path.setAttribute('d', d);
+    $fill.setAttribute('d', d+' L 460 220 L 0 220 Z');
+  }, 80);
+}
+
+function cashOutRocket(){
+  if(!rocketState.running || rocketState.cashed) return;
+  const win = +(rocketState.stake * rocketState.mult).toFixed(2);
+  const profit = +(win - rocketState.stake).toFixed(2);
+  balance += win; updateBalance();
+  rocketState.cashed = true;
+  $('cashBtn').disabled = true;
+  toast('Cashed out at '+rocketState.mult.toFixed(2)+'× · +KES '+fmt(profit), 'win');
+  logPlay('Rocket · cashed at '+rocketState.mult.toFixed(2)+'×', profit);
+}
+
+/* ============================================================
+   GAME 2 — DICE DUEL
+   ============================================================ */
+function renderDice(){
+  openModal('🎲 Dice Duel');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Roll higher than the house. Winner pays 2×.</p>
+    <div class="game-visual">
+      <div style="text-align:center">
+        <div class="die-lbl">YOU</div>
+        <div class="die" id="diceYou">🎲</div>
+      </div>
+      <div style="text-align:center">
+        <div class="die-lbl">HOUSE</div>
+        <div class="die" id="diceHouse">🎲</div>
+      </div>
+    </div>
+    <div class="result-line" id="diceRes"></div>
+    ${stakeControls('dice')}
+    <button class="game-btn" id="rollBtn">🎲 ROLL DICE</button>
+  `;
+  wireChips(gameBody);
+  $('rollBtn').addEventListener('click', ()=>{
+    const stake = parseStake('diceStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const faces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+    const you = 1+Math.floor(Math.random()*6);
+    const house = 1+Math.floor(Math.random()*6);
+    $('diceYou').textContent = faces[you-1];
+    $('diceHouse').textContent = faces[house-1];
+    const $res = $('diceRes');
+    if(you > house){
+      balance += stake; updateBalance();
+      $res.textContent = `You ${you} vs ${house} — WIN +KES ${fmt(stake)}`;
+      $res.style.color = 'var(--green)';
+      toast('You win! +KES '+fmt(stake),'win');
+      logPlay('Dice · WIN', stake);
+    } else if(you < house){
+      balance -= stake; updateBalance();
+      $res.textContent = `You ${you} vs ${house} — LOSS -KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('House wins -KES '+fmt(stake),'lose');
+      logPlay('Dice · LOSS', -stake);
+    } else {
+      $res.textContent = `Tie at ${you} — stake returned`;
+      $res.style.color = 'var(--gold)';
+      toast('Push — stake returned');
+      logPlay('Dice · PUSH', 0);
+    }
+  });
+}
+
+/* ============================================================
+   GAME 3 — COIN FLIP
+   ============================================================ */
+function renderCoin(){
+  openModal('🪙 Coin Flip');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Pick a side. 50/50 · win pays 2×.</p>
+    <div class="center-emoji" id="coinFace">🪙</div>
+    <div class="result-line" id="coinRes"></div>
+    <div class="chip-row" style="margin-bottom:10px">
+      <div class="chip active" data-side="heads">HEADS</div>
+      <div class="chip" data-side="tails">TAILS</div>
+    </div>
+    ${stakeControls('coin')}
+    <button class="game-btn" id="flipBtn">🪙 FLIP COIN</button>
+  `;
+  wireChips(gameBody);
+  let side = 'heads';
+  gameBody.querySelectorAll('.chip[data-side]').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      gameBody.querySelectorAll('.chip[data-side]').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      side = c.dataset.side;
+    });
+  });
+  $('flipBtn').addEventListener('click', ()=>{
+    const stake = parseStake('coinStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const result = Math.random()<0.5 ? 'heads' : 'tails';
+    $('coinFace').textContent = result==='heads'?'👑':'🌙';
+    const $res = $('coinRes');
+    if(result === side){
+      balance += stake; updateBalance();
+      $res.textContent = `Landed ${result.toUpperCase()} — WIN +KES ${fmt(stake)}`;
+      $res.style.color = 'var(--green)';
+      toast('You win! +KES '+fmt(stake),'win');
+      logPlay('Coin · WIN', stake);
+    } else {
+      balance -= stake; updateBalance();
+      $res.textContent = `Landed ${result.toUpperCase()} — LOSS -KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('Lost -KES '+fmt(stake),'lose');
+      logPlay('Coin · LOSS', -stake);
+    }
+  });
+}
+
+/* ============================================================
+   GAME 4 — LUCKY SPIN
+   ============================================================ */
+function renderSpin(){
+  openModal('🎰 Lucky Spin');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Weighted multiplier spin up to 10×.</p>
+    <div class="center-emoji" id="spinFace">🎰</div>
+    <div class="result-line" id="spinRes"></div>
+    ${stakeControls('spin')}
+    <button class="game-btn" id="spinBtn">🎰 SPIN</button>
+  `;
+  wireChips(gameBody);
+  $('spinBtn').addEventListener('click', ()=>{
+    const stake = parseStake('spinStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const roll = Math.random();
+    let mult;
+    if(roll<0.40) mult=0;
+    else if(roll<0.60) mult=0.5;
+    else if(roll<0.80) mult=1;
+    else if(roll<0.90) mult=2;
+    else if(roll<0.97) mult=5;
+    else mult=10;
+
+    const payout = +(stake*mult).toFixed(2);
+    const net = +(payout-stake).toFixed(2);
+    balance += net; updateBalance();
+
+    $('spinFace').textContent = ['💨','🙂','😀','🤩','🔥','💎'][
+      mult===0?0:mult===0.5?1:mult===1?2:mult===2?3:mult===5?4:5
+    ];
+    const $res = $('spinRes');
+    if(mult===0){
+      $res.textContent = `No win — lost KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('No win','lose');
+      logPlay('Spin · 0× LOSS', -stake);
+    } else if(mult===1){
+      $res.textContent = 'Push at 1× — stake returned';
+      $res.style.color = 'var(--gold)';
+      toast('Push');
+      logPlay('Spin · 1× PUSH', 0);
+    } else {
+      $res.textContent = `${mult}× — WIN +KES ${fmt(net)}`;
+      $res.style.color = 'var(--green)';
+      toast('Win! +KES '+fmt(net),'win');
+      logPlay('Spin · '+mult+'× WIN', net);
+    }
+  });
+}
+
+/* ============================================================
+   GAME 5 — COLOR CALL
+   ============================================================ */
+function renderColor(){
+  openModal('🎨 Color Call');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Green/Red pay 2× · Violet pays 4.5×.</p>
+    <div class="color-ball-wrap"><div class="color-ball" id="colorBall">❓</div></div>
+    <div class="result-line" id="colorRes"></div>
+    <div class="chip-row" style="margin-bottom:10px">
+      <div class="chip active" data-col="green">GREEN</div>
+      <div class="chip" data-col="red">RED</div>
+      <div class="chip" data-col="violet">VIOLET</div>
+    </div>
+    ${stakeControls('color')}
+    <button class="game-btn" id="colorBtn">🎨 PREDICT</button>
+  `;
+  wireChips(gameBody);
+  let pick = 'green';
+  gameBody.querySelectorAll('.chip[data-col]').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      gameBody.querySelectorAll('.chip[data-col]').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active'); pick = c.dataset.col;
+    });
+  });
+  $('colorBtn').addEventListener('click', ()=>{
+    const stake = parseStake('colorStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const r = Math.random();
+    const result = r<0.45?'green':r<0.90?'red':'violet';
+    const cols = { green:'#10B981', red:'#EF4444', violet:'#7C3AED' };
+    const ball = $('colorBall');
+    ball.textContent = { green:'🟢', red:'🔴', violet:'🟣' }[result];
+    ball.style.background = cols[result]+'33';
+    ball.style.boxShadow = '0 0 40px '+cols[result]+'88';
+    const mult = result==='violet'?4.5:2;
+    const $res = $('colorRes');
+    if(result===pick){
+      const win = +(stake*mult).toFixed(2);
+      const net = +(win-stake).toFixed(2);
+      balance += net; updateBalance();
+      $res.textContent = `${result.toUpperCase()} · ${mult}× — WIN +KES ${fmt(net)}`;
+      $res.style.color = 'var(--green)';
+      toast('Win! +KES '+fmt(net),'win');
+      logPlay('Color · '+result+' WIN', net);
+    } else {
+      balance -= stake; updateBalance();
+      $res.textContent = `${result.toUpperCase()} — LOSS -KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('Lost KES '+fmt(stake),'lose');
+      logPlay('Color · '+result+' LOSS', -stake);
+    }
+  });
+}
+
+/* ============================================================
+   GAME 6 — MINI KENO
+   ============================================================ */
+function renderKeno(){
+  openModal('🔢 Mini Keno');
+  const pool = Array.from({length:30},(_,i)=>i+1);
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Pick 3 from 1–30. Match 3 = 10× · Match 2 = 2× · Match 1 = 0.5×.</p>
+    <div class="keno-grid" id="kenoGrid"></div>
+    <div class="result-line" id="kenoRes"></div>
+    ${stakeControls('keno')}
+    <button class="game-btn" id="kenoBtn">🔢 DRAW</button>
+  `;
+  wireChips(gameBody);
+  const picks = new Set();
+  const grid = $('kenoGrid');
+  pool.forEach(n=>{
+    const b = document.createElement('button');
+    b.textContent = n; b.dataset.n = n;
+    b.addEventListener('click', ()=>{
+      if(picks.has(n)){ picks.delete(n); b.classList.remove('picked'); }
+      else {
+        if(picks.size>=3) return;
+        picks.add(n); b.classList.add('picked');
+      }
+    });
+    grid.appendChild(b);
+  });
+  $('kenoBtn').addEventListener('click', ()=>{
+    if(picks.size!==3){ toast('Pick exactly 3 numbers','lose'); return; }
+    const stake = parseStake('kenoStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const draw = [];
+    const copy = pool.slice();
+    for(let i=0;i<5;i++){
+      const idx = Math.floor(Math.random()*copy.length);
+      draw.push(copy.splice(idx,1)[0]);
+    }
+    const matches = [...picks].filter(n=>draw.includes(n)).length;
+    let mult = 0;
+    if(matches===3) mult=10;
+    else if(matches===2) mult=2;
+    else if(matches===1) mult=0.5;
+
+    grid.querySelectorAll('button').forEach(b=>{
+      b.classList.remove('drawn','match');
+      const n = +b.dataset.n;
+      if(draw.includes(n)) b.classList.add('drawn');
+      if(picks.has(n) && draw.includes(n)) b.classList.add('match');
+    });
+
+    const payout = +(stake*mult).toFixed(2);
+    const net = +(payout-stake).toFixed(2);
+    balance += net; updateBalance();
+    const $res = $('kenoRes');
+    const drawStr = 'Drawn: '+draw.join(', ');
+    if(mult>0){
+      $res.innerHTML = `${drawStr}<br>${matches} match${matches>1?'es':''} · ${mult}× — WIN +KES ${fmt(net)}`;
+      $res.style.color = 'var(--green)';
+      toast('Win! +KES '+fmt(net),'win');
+      logPlay('Keno · '+matches+' match WIN', net);
+    } else {
+      $res.innerHTML = `${drawStr}<br>No matches — LOSS -KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('No matches','lose');
+      logPlay('Keno · LOSS', -stake);
+    }
+  });
+}
+
+/* ============================================================
+   GAME 7 — HIGH-LOW
+   ============================================================ */
+const CARD_VALUES = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+function cardScore(v){ return CARD_VALUES.indexOf(v); }
+
+function renderHighLow(){
+  openModal('🃏 High-Low');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Guess if the next card is higher or lower. Win pays 2×.</p>
+    <div class="game-visual">
+      <div class="die" id="cardFace" style="font-size:56px">🂠</div>
+    </div>
+    <div class="result-line" id="hlRes"></div>
+    <div class="chip-row" style="margin-bottom:10px">
+      <div class="chip active" data-guess="high">HIGHER</div>
+      <div class="chip" data-guess="low">LOWER</div>
+    </div>
+    ${stakeControls('hl')}
+    <button class="game-btn" id="hlBtn">🃏 DRAW CARD</button>
+  `;
+  wireChips(gameBody);
+  let guess = 'high';
+  let current = null;
+  gameBody.querySelectorAll('.chip[data-guess]').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      gameBody.querySelectorAll('.chip[data-guess]').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active'); guess = c.dataset.guess;
+    });
+  });
+  $('hlBtn').addEventListener('click', ()=>{
+    const stake = parseStake('hlStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    if(current === null){
+      // first draw — sets the base card, no bet
+      current = CARD_VALUES[Math.floor(Math.random()*CARD_VALUES.length)];
+      $('cardFace').textContent = current;
+      $('hlRes').textContent = 'Base card drawn. Now guess high or low.';
+      $('hlRes').style.color = 'var(--gold)';
+      return;
+    }
+    const next = CARD_VALUES[Math.floor(Math.random()*CARD_VALUES.length)];
+    $('cardFace').textContent = next;
+    const baseScore = cardScore(current);
+    const nextScore = cardScore(next);
+    const $res = $('hlRes');
+    if(baseScore === nextScore){
+      $res.textContent = `Tie (${current} → ${next}) — stake returned`;
+      $res.style.color = 'var(--gold)';
+      toast('Push');
+      logPlay('HighLow · PUSH', 0);
+    } else {
+      const won = (guess==='high' && nextScore > baseScore) ||
+                  (guess==='low'  && nextScore < baseScore);
+      if(won){
+        balance += stake; updateBalance();
+        $res.textContent = `Win (${current} → ${next}) +KES ${fmt(stake)}`;
+        $res.style.color = 'var(--green)';
+        toast('Win! +KES '+fmt(stake),'win');
+        logPlay('HighLow · WIN', stake);
       } else {
-        const messages = {
-          failed: "No real deposit transactions exist in this demo.",
-          transactions: "Demo transaction history is not connected.",
-          bets: "No real bets are placed in this demo.",
-          profile: "TOP-BET local demo profile.",
-          refer: "Referral rewards are not enabled."
-        };
-        toast(messages[action] || "Demo feature");
+        balance -= stake; updateBalance();
+        $res.textContent = `Loss (${current} → ${next}) -KES ${fmt(stake)}`;
+        $res.style.color = 'var(--red)';
+        toast('Lost KES '+fmt(stake),'lose');
+        logPlay('HighLow · LOSS', -stake);
       }
-    });
+    }
+    current = next;
   });
+}
 
-  document.querySelectorAll(".odd").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".odd.selected").forEach(item => {
-        item.classList.remove("selected");
-      });
-      button.classList.add("selected");
-      toast("Demo odds " + button.dataset.odd + " selected. No bet placed.");
-    });
+/* ============================================================
+   GAME 8 — PRIZE WHEEL
+   ============================================================ */
+function renderWheel(){
+  openModal('🎡 Prize Wheel');
+  gameBody.innerHTML = `
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Spin for a weighted multiplier. Match symbol = 3× the outcome.</p>
+    <div class="center-emoji" id="wheelFace">🎡</div>
+    <div class="result-line" id="wheelRes"></div>
+    ${stakeControls('wheel')}
+    <button class="game-btn" id="wheelBtn">🎡 SPIN WHEEL</button>
+  `;
+  wireChips(gameBody);
+  $('wheelBtn').addEventListener('click', ()=>{
+    const stake = parseStake('wheelStake');
+    if(stake===null){ toast('Enter a valid stake','lose'); return; }
+    const r = Math.random();
+    let mult;
+    if(r < 0.50) mult = 0;
+    else if(r < 0.75) mult = 0.5;
+    else if(r < 0.90) mult = 1.5;
+    else if(r < 0.97) mult = 3;
+    else mult = 8;
+    const payout = +(stake*mult).toFixed(2);
+    const net = +(payout-stake).toFixed(2);
+    balance += net; updateBalance();
+    $('wheelFace').textContent = ['💨','🙂','😀','🤩','💎'][
+      mult===0?0:mult===0.5?1:mult===1.5?2:mult===3?3:4
+    ];
+    const $res = $('wheelRes');
+    if(mult===0){
+      $res.textContent = `No win — lost KES ${fmt(stake)}`;
+      $res.style.color = 'var(--red)';
+      toast('No win','lose');
+      logPlay('Wheel · 0× LOSS', -stake);
+    } else {
+      $res.textContent = `${mult}× — WIN +KES ${fmt(net)}`;
+      $res.style.color = 'var(--green)';
+      toast('Win! +KES '+fmt(net),'win');
+      logPlay('Wheel · '+mult+'× WIN', net);
+    }
   });
+}
 
-  $("search").addEventListener("input", () => {
-    const query = $("search").value.toLowerCase().trim();
-    let count = 0;
+/* ============================================================
+   GAME DISPATCH
+   ============================================================ */
+const games = {
+  rocket: renderRocket,
+  dice:   renderDice,
+  coin:   renderCoin,
+  spin:   renderSpin,
+  color:  renderColor,
+  keno:   renderKeno,
+  highlow: renderHighLow,
+  wheel:  renderWheel
+};
 
-    document.querySelectorAll(".match").forEach(match => {
-      const teams = match.dataset.teams.toLowerCase();
-      const league = match.querySelector(".league").textContent.toLowerCase();
-      const visible = teams.includes(query) || league.includes(query);
-
-      match.style.display = visible ? "" : "none";
-      if (visible) count++;
-    });
-
-    $("empty").style.display = count ? "none" : "block";
+document.querySelectorAll('.game').forEach(g=>{
+  g.addEventListener('click', ()=>{
+    const id = g.dataset.game;
+    if(games[id]) games[id]();
   });
+});
 
-  document.querySelectorAll(".sports button").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".sports button").forEach(item => {
-        item.classList.remove("active");
-      });
-      button.classList.add("active");
-      toast(button.textContent.trim() + " selected. Sample fixtures remain displayed.");
-    });
+/* ============================================================
+   BOTTOM NAV
+   ============================================================ */
+document.querySelectorAll('.nav-item').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const nav = b.dataset.nav;
+    if(nav==='Games'){
+      document.querySelectorAll('.section')[0].scrollIntoView({behavior:'smooth'});
+    } else if(nav==='Fixtures'){
+      document.querySelector('#matches').scrollIntoView({behavior:'smooth'});
+    } else if(nav==='History'){
+      if(playLog.length===0){ toast('No plays yet this session'); return; }
+      const last = playLog.slice(0,5).map(p=>{
+        const s = p.delta>=0?'+':'';
+        return p.label+' · '+s+fmt(p.delta);
+      }).join('\n');
+      toast('Recent: '+last);
+    } else if(nav==='Menu'){
+      $('profileMenu').classList.toggle('open');
+    } else {
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
   });
+});
 
-  document.querySelectorAll(".game").forEach(game => {
-    game.addEventListener("click", () => {
-      toast(game.dataset.game + ": visual demo only.");
-    });
-  });
-
-  document.querySelectorAll(".filters button").forEach(button => {
-    button.addEventListener("click", () => {
-      button.parentElement.querySelectorAll("button").forEach(item => {
-        item.classList.remove("active");
-      });
-      button.classList.add("active");
-
-      if (button.dataset.filter) {
-        toast(button.dataset.filter + " selected.");
-      }
-    });
-  });
-
-  document.querySelectorAll(".nav-item").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".nav-item").forEach(item => {
-        item.classList.remove("active");
-      });
-      button.classList.add("active");
-
-      const page = button.dataset.nav;
-
-      if (page === "Casino") {
-        document.querySelectorAll(".section")[1].scrollIntoView({behavior:"smooth"});
-      } else if (page === "Games") {
-        document.querySelector(".section").scrollIntoView({behavior:"smooth"});
-      } else if (page === "Live") {
-        toast("Live sports data is not connected.");
-      } else if (page === "My Bets") {
-        toast("No real bets exist in this demo.");
-      } else {
-        window.scrollTo({top:0,behavior:"smooth"});
-      }
-    });
-  });
-
+/* ============================================================
+   BOOT
+   ============================================================ */
+updateBalance();
 })();
 </script>
-
 </body>
-</html>
+  </html>
