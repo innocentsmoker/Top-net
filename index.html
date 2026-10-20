@@ -4,20 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
 <meta name="theme-color" content="#07070A" />
-<title>🎰 TOP-BET — Betting Platform</title>
+<title>🎰 TOP-BET — MOST TRUSTED SOURCE OF MONEY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   TOP-BET — Demo Styles
+   TOP-BET · Play-Money Demo
    ============================================================ */
 :root {
   --gold: #F5C542;
   --emerald: #10B981;
   --purple: #7C3AED;
   --red: #EF4444;
+  --cyan: #06B6D4;
+  --pink: #EC4899;
+  --orange: #F97316;
   --ink: #07070A;
   --charcoal: #0F1015;
   --card: rgba(255,255,255,0.045);
@@ -40,7 +43,7 @@ body {
     var(--ink);
 }
 
-/* ---- Demo banner (always visible) ---- */
+/* ---------- Demo banner ---------- */
 .demo-banner {
   position: sticky;
   top: 0;
@@ -55,21 +58,188 @@ body {
   text-transform: uppercase;
 }
 
-/* ---- Header ---- */
+/* ---------- AUTH SCREEN ---------- */
+#authScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(124,58,237,0.25), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(16,185,129,0.20), transparent 55%),
+    var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+#authScreen.hidden { display: none; }
+.auth-box {
+  width: 100%;
+  max-width: 420px;
+  background: var(--charcoal);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  animation: fadeUp .4s ease;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.auth-logo {
+  text-align: center;
+  margin-bottom: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+.auth-sub {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: rgba(255,255,255,0.04);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.auth-tab {
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.auth-tab.active {
+  background: linear-gradient(90deg, var(--gold), var(--emerald));
+  color: #0B0B0F;
+}
+.auth-field { margin-bottom: 12px; }
+.auth-field label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.auth-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color .2s, box-shadow .2s;
+}
+.auth-input:focus {
+  outline: none;
+  border-color: rgba(245,197,66,0.55);
+  box-shadow: 0 0 0 3px rgba(245,197,66,0.15);
+}
+.auth-input.invalid { border-color: rgba(239,68,68,0.6); }
+.auth-input.valid { border-color: rgba(16,185,129,0.6); }
+.auth-hint {
+  font-size: 11px;
+  margin-top: 4px;
+  color: rgba(255,255,255,0.4);
+  min-height: 14px;
+}
+.auth-hint.ok { color: var(--emerald); }
+.auth-hint.err { color: #fca5a5; }
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.toggle-opt {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all .2s;
+}
+.toggle-opt.active {
+  background: rgba(245,197,66,0.15);
+  border-color: rgba(245,197,66,0.5);
+  color: var(--gold);
+}
+
+.auth-error {
+  display: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(239,68,68,0.4);
+  background: rgba(239,68,68,0.10);
+  color: #fca5a5;
+  font-size: 12.5px;
+  margin-bottom: 12px;
+}
+.auth-error.show { display: block; }
+
+.auth-submit {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, var(--gold), var(--emerald), var(--purple));
+  color: #0B0B0F;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(245,197,66,0.25);
+  transition: box-shadow .2s, transform .15s;
+  margin-top: 4px;
+}
+.auth-submit:hover { box-shadow: 0 0 34px rgba(245,197,66,0.5); }
+.auth-submit:active { transform: scale(0.99); }
+
+.auth-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ---------- MAIN APP ---------- */
+#app { display: none; }
+#app.visible { display: block; }
+
 .header {
-  padding: 20px 16px 8px;
+  padding: 18px 16px 6px;
   text-align: center;
 }
 .header h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
 }
 .text-grad {
   background: linear-gradient(90deg, var(--gold), var(--emerald), var(--purple));
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .header .tag {
   font-size: 12px;
@@ -77,15 +247,95 @@ body {
   margin-top: 4px;
 }
 .header .tag b { color: var(--gold); }
+.header .user-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  flex-wrap: wrap;
+}
+.header .user-row b { color: var(--emerald); }
+.logout-btn {
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #fca5a5;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
 
-/* ---- Layout ---- */
+/* ---------- SUPPORT LINK ---------- */
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.35);
+  color: var(--emerald);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, box-shadow .2s;
+}
+.support-link:hover {
+  background: rgba(16,185,129,0.20);
+  box-shadow: 0 0 12px rgba(16,185,129,0.35);
+}
+.support-link:active { transform: scale(0.97); }
+
+/* ---------- JACKPOT TICKER ---------- */
+.jackpot-bar {
+  margin: 14px auto 0;
+  max-width: 820px;
+  background: linear-gradient(90deg, rgba(124,58,237,0.25), rgba(245,197,66,0.20), rgba(16,185,129,0.25));
+  border: 1px solid rgba(245,197,66,0.35);
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 30px rgba(245,197,66,0.2);
+}
+.jackpot-bar .lbl {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+}
+.jackpot-bar .amt {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 16px rgba(245,197,66,0.6);
+  margin-top: 2px;
+  transition: color .3s;
+}
+.jackpot-bar .amt.bump { color: #fff; }
+.jackpot-bar .desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+  line-height: 1.5;
+}
+
+/* ---------- WRAP ---------- */
 .wrap {
   max-width: 820px;
   margin: 0 auto;
-  padding: 0 14px 40px;
+  padding: 14px 14px 40px;
 }
 
-/* ---- Balance bar ---- */
+/* ---------- BALANCE ---------- */
 .balance-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -100,85 +350,97 @@ body {
   backdrop-filter: blur(12px);
 }
 .stat .lbl {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.5);
-  font-weight: 500;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.5); font-weight: 500;
 }
 .stat .val {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 4px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin-top: 4px;
 }
 .stat.gold .val { color: var(--gold); }
 .stat.green .val { color: var(--emerald); }
 
-/* ---- Game grid ---- */
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (min-width: 560px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+/* ---------- SHELVES ---------- */
+.shelf { margin-bottom: 20px; }
+.shelf-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.shelf-title .dot {
+  width: 8px; height: 8px; border-radius: 999px;
+  animation: pulseBadge 1.8s ease-in-out infinite;
+}
+.shelf-title.live .dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.shelf-title.virtual .dot { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+.shelf-title.jackpot .dot { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+@keyframes pulseBadge {
+  0%,100% { box-shadow: 0 0 0 0 currentColor; }
+  50%     { box-shadow: 0 0 0 6px transparent; }
+}
+
+.shelf-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.shelf-scroll::-webkit-scrollbar { height: 4px; }
+.shelf-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
 
 .game-card {
-  position: relative;
-  overflow: hidden;
+  flex: 0 0 150px;
+  scroll-snap-align: start;
   background: var(--card);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 14px;
   cursor: pointer;
   transition: transform .18s ease, box-shadow .25s ease, border-color .2s;
-  min-height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(12px);
+  min-height: 120px;
+  position: relative;
+  overflow: hidden;
 }
-.game-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(245,197,66,0.35);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(245,197,66,0.15);
-}
-.game-card .icon { font-size: 30px; line-height: 1; }
+.game-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.game-card .icon { font-size: 26px; line-height: 1; }
 .game-card .name {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  margin-top: 10px;
+  font-size: 13px;
+  margin-top: 8px;
   color: #fff;
 }
-.game-card .desc {
-  font-size: 11px;
-  color: rgba(255,255,255,0.55);
-  margin-top: 2px;
-}
-.game-card .badge-live {
-  position: absolute;
-  top: 10px; right: 10px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #fff;
-  background: rgba(16,185,129,0.9);
-  border-radius: 999px;
-  padding: 3px 8px;
-  animation: pulseBadge 1.8s ease-in-out infinite;
-}
-@keyframes pulseBadge {
-  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); }
-  50%     { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
-}
+.game-card .desc { font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 2px; line-height: 1.35; }
 
-/* ---- Buttons ---- */
+.game-card.gold { border-color: rgba(245,197,66,0.35); background: linear-gradient(160deg, rgba(245,197,66,0.12), rgba(255,255,255,0.03)); }
+.game-card.emerald { border-color: rgba(16,185,129,0.35); background: linear-gradient(160deg, rgba(16,185,129,0.12), rgba(255,255,255,0.03)); }
+.game-card.purple { border-color: rgba(124,58,237,0.35); background: linear-gradient(160deg, rgba(124,58,237,0.15), rgba(255,255,255,0.03)); }
+.game-card.red { border-color: rgba(239,68,68,0.35); background: linear-gradient(160deg, rgba(239,68,68,0.12), rgba(255,255,255,0.03)); }
+.game-card.cyan { border-color: rgba(6,182,212,0.35); background: linear-gradient(160deg, rgba(6,182,212,0.12), rgba(255,255,255,0.03)); }
+.game-card.pink { border-color: rgba(236,72,153,0.35); background: linear-gradient(160deg, rgba(236,72,153,0.12), rgba(255,255,255,0.03)); }
+.game-card.orange { border-color: rgba(249,115,22,0.35); background: linear-gradient(160deg, rgba(249,115,22,0.12), rgba(255,255,255,0.03)); }
+.game-card:hover.gold { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(245,197,66,0.25); }
+.game-card:hover.emerald { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(16,185,129,0.25); }
+.game-card:hover.purple { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(124,58,237,0.30); }
+.game-card:hover.red { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(239,68,68,0.25); }
+.game-card:hover.cyan { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(6,182,212,0.25); }
+.game-card:hover.pink { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(236,72,153,0.25); }
+.game-card:hover.orange { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 24px rgba(249,115,22,0.25); }
+
+/* ---------- BUTTONS ---------- */
 .btn {
-  border: none;
-  border-radius: 14px;
-  padding: 12px 18px;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  transition: transform .15s, box-shadow .2s, background .2s;
+  border: none; border-radius: 14px; padding: 12px 18px;
+  font-family: inherit; font-weight: 700; font-size: 14px;
+  cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s;
   touch-action: manipulation;
 }
 .btn:active { transform: scale(0.98); }
@@ -189,15 +451,9 @@ body {
 }
 .btn-primary:hover { box-shadow: 0 0 30px rgba(245,197,66,0.45); }
 .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
-.btn-ghost {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.85);
-}
-.btn-ghost:hover { background: rgba(255,255,255,0.12); }
 .btn-danger { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.35); }
 
-/* ---- Modal / game screen ---- */
+/* ---------- MODAL ---------- */
 .modal {
   position: fixed; inset: 0;
   background: rgba(7,7,10,0.85);
@@ -210,10 +466,8 @@ body {
 }
 .modal.open { display: flex; animation: fadeIn .2s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
 .game-panel {
-  width: 100%;
-  max-width: 460px;
+  width: 100%; max-width: 460px;
   background: var(--charcoal);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 22px;
@@ -224,26 +478,43 @@ body {
   overflow-y: auto;
 }
 @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
 .game-panel .head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 12px;
 }
-.game-panel .head h3 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 18px; color: #fff;
-}
+.game-panel .head h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: #fff; }
 .close-btn {
-  background: rgba(255,255,255,0.08);
-  border: none; color: #fff;
-  width: 32px; height: 32px;
-  border-radius: 999px;
-  font-size: 18px; cursor: pointer;
-  transition: background .2s;
+  background: rgba(255,255,255,0.08); border: none; color: #fff;
+  width: 32px; height: 32px; border-radius: 999px; font-size: 18px;
+  cursor: pointer; transition: background .2s;
 }
 .close-btn:hover { background: rgba(255,255,255,0.16); }
 
-/* ---- Rocket game ---- */
+/* ---------- ROCKET ---------- */
+.crash-history {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  scrollbar-width: none;
+}
+.crash-history::-webkit-scrollbar { display: none; }
+.crash-chip {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(16,185,129,0.15);
+  color: var(--emerald);
+  border: 1px solid rgba(16,185,129,0.3);
+  animation: popIn .3s ease;
+}
+.crash-chip.high { background: rgba(245,197,66,0.15); color: var(--gold); border-color: rgba(245,197,66,0.35); }
+.crash-chip.low { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3); }
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
 .rocket-stage {
   position: relative;
   height: 220px;
@@ -253,33 +524,24 @@ body {
   border: 1px solid rgba(255,255,255,0.08);
 }
 .multiplier {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   pointer-events: none;
 }
 .multiplier .num {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 48px; font-weight: 700; color: #fff;
   text-shadow: 0 0 24px rgba(245,197,66,0.55);
-  line-height: 1;
-  transition: color .2s;
+  line-height: 1; transition: color .2s;
 }
 .multiplier.crashed .num { color: #EF4444; text-shadow: 0 0 24px rgba(239,68,68,0.7); }
 .multiplier .state {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-top: 8px;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-top: 8px;
 }
 .rocket-emoji {
-  position: absolute;
-  font-size: 34px;
-  transform: translate(-50%, -50%);
+  position: absolute; font-size: 34px; transform: translate(-50%, -50%);
   transition: left .08s linear, top .08s linear;
   filter: drop-shadow(0 0 12px rgba(245,197,66,0.8));
   z-index: 2;
@@ -291,114 +553,63 @@ body {
 .game-controls { margin-top: 14px; }
 .stake-row { display: flex; gap: 8px; margin-bottom: 10px; }
 .stake-row .input {
-  flex: 1;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #fff;
-  border-radius: 12px;
-  padding: 12px 14px;
-  font-size: 16px;
-  font-family: inherit;
+  flex: 1; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1); color: #fff;
+  border-radius: 12px; padding: 12px 14px; font-size: 16px; font-family: inherit;
 }
 .stake-row .input:focus { outline: none; border-color: rgba(245,197,66,0.5); }
 .chip-row { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
 .chip {
-  flex: 1;
-  min-width: 56px;
-  padding: 8px 0;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.7);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: all .15s;
+  flex: 1; min-width: 56px; padding: 8px 0; border-radius: 10px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600;
+  cursor: pointer; text-align: center; transition: all .15s;
 }
 .chip:hover { background: rgba(255,255,255,0.1); }
 .chip.active { background: rgba(245,197,66,0.2); border-color: rgba(245,197,66,0.5); color: var(--gold); }
-
 .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.btn-cashout {
-  background: linear-gradient(90deg, var(--emerald), #059669);
-  color: #fff;
-}
+.btn-cashout { background: linear-gradient(90deg, var(--emerald), #059669); color: #fff; }
 .btn-cashout:disabled { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
 
-/* History chips */
-.hist-row { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
-.hist-chip {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(16,185,129,0.15);
-  color: var(--emerald);
-}
-.hist-chip.high { background: rgba(245,197,66,0.15); color: var(--gold); }
-.hist-chip.low { background: rgba(239,68,68,0.15); color: #fca5a5; }
-
-/* Toast */
-.toast {
-  position: fixed;
-  bottom: 24px; left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: #1a1030;
-  border: 1px solid rgba(245,197,66,0.4);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  z-index: 300;
-  opacity: 0;
-  transition: all .3s ease;
-  pointer-events: none;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-}
-.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-.toast.win { border-color: rgba(16,185,129,0.5); }
-.toast.lose { border-color: rgba(239,68,68,0.5); }
-
-/* History list */
+/* ---------- HISTORY ---------- */
 .history-list { margin-top: 20px; }
-.history-list h4 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 10px;
-}
+.history-list h4 { font-family: 'Space Grotesk', sans-serif; font-size: 14px; color: #fff; margin-bottom: 10px; }
 .hrow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 14px;
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  margin-bottom: 6px;
-  font-size: 13px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+  margin-bottom: 6px; font-size: 13px;
 }
 .hrow .when { color: rgba(255,255,255,0.5); font-size: 11px; }
 .hrow .amount { font-weight: 700; }
 .hrow .amount.win { color: var(--emerald); }
 .hrow .amount.lose { color: #fca5a5; }
 
-/* Footer */
+/* ---------- TOAST ---------- */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1a1030; border: 1px solid rgba(245,197,66,0.4);
+  color: #fff; padding: 12px 20px; border-radius: 14px;
+  font-size: 13px; font-weight: 600; z-index: 300;
+  opacity: 0; transition: all .3s ease; pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  max-width: 90vw;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast.win { border-color: rgba(16,185,129,0.5); }
+.toast.lose { border-color: rgba(239,68,68,0.5); }
+
+/* ---------- FOOTER ---------- */
 .footer {
-  text-align: center;
-  padding: 20px 16px 40px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.7;
+  text-align: center; padding: 20px 16px 40px;
+  font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7;
 }
 .footer .brand { color: rgba(255,255,255,0.75); font-weight: 600; }
 .footer .links { margin-top: 8px; }
 .footer .links a { color: inherit; text-decoration: none; margin: 0 6px; transition: color .2s; }
 .footer .links a:hover { color: var(--gold); }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
@@ -406,155 +617,440 @@ body {
 </head>
 <body>
 
-<!-- ============ DEMO BANNER (always visible) ============ -->
-<div class="demo-banner">⚠ NOTE THAT NO DEMO · PLAY MONEY · NO FAKE WAGERING · 18+</div>
+<!-- ============ DEMO BANNER ============ -->
+<div class="demo-banner">⚠ PLAY-MONEY ·  REAL WAGERING · 18+</div>
 
-<!-- ============ HEADER ============ -->
-<header class="header">
-  <h1><span class="text-grad">TOP-BET</span></h1>
-  <div class="tag">Powered by <b>CHARLIE</b> · Created by <b>SIR INNOCENT TECH</b></div>
-</header>
-
-<div class="wrap">
-
-  <!-- ============ BALANCE ============ -->
-  <div class="balance-bar">
-    <div class="stat gold">
-      <div class="lbl">Demo Balance</div>
-      <div class="val" id="balance">10,000.00</div>
+<!-- ============================================================
+     AUTH SCREEN
+     ============================================================ -->
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo"><span class="text-grad">TOP-BET</span></div>
+    <div class="auth-sub">
+      Powered by <b style="color:var(--gold)">MRS INNOCENT</b> · Created by SIR INNOCENT TECH
     </div>
-    <div class="stat green">
-      <div class="lbl">Session P/L</div>
-      <div class="val" id="pl">0.00</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="signup" type="button">Sign Up</button>
+      <button class="auth-tab" data-tab="login" type="button">Login</button>
+    </div>
+
+    <form id="authForm" novalidate>
+      <div id="signupOnly">
+        <label style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.5);font-weight:600;margin-bottom:6px;">Register with</label>
+        <div class="toggle-row" style="margin-bottom:14px;">
+          <button type="button" class="toggle-opt active" data-idtype="safaricom">📱 Safaricom</button>
+          <button type="button" class="toggle-opt" data-idtype="gmail">✉️ Gmail</button>
+        </div>
+
+        <div class="auth-field" id="safField">
+          <label for="safNumber">Safaricom Number</label>
+          <input id="safNumber" class="auth-input" type="tel" inputmode="numeric" placeholder="0712 345 678" />
+          <div class="auth-hint" id="safHint">Format: 07XX XXX XXX or 2547XXXXXXXX</div>
+        </div>
+
+        <div class="auth-field" id="gmailField" style="display:none;">
+          <label for="gmailAddress">Gmail Address</label>
+          <input id="gmailAddress" class="auth-input" type="email" placeholder="you@gmail.com" />
+          <div class="auth-hint" id="gmailHint">Must be a valid @gmail.com address</div>
+        </div>
+      </div>
+
+      <div id="loginOnly" style="display:none;">
+        <div class="auth-field">
+          <label for="loginId">Safaricom Number or Gmail</label>
+          <input id="loginId" class="auth-input" type="text" placeholder="0712 345 678 or you@gmail.com" />
+          <div class="auth-hint" id="loginHint">Use whatever you signed up with</div>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label for="password">Password</label>
+        <input id="password" class="auth-input" type="password" placeholder="At least 6 characters" />
+        <div class="auth-hint" id="pwHint">Minimum 6 characters</div>
+      </div>
+
+      <div class="auth-field" id="confirmField">
+        <label for="password2">Confirm Password</label>
+        <input id="password2" class="auth-input" type="password" placeholder="Repeat password" />
+        <div class="auth-hint" id="pw2Hint">Must match above</div>
+      </div>
+
+      <div class="auth-error" id="authError"></div>
+
+      <button class="auth-submit" type="submit" id="authSubmit">CREATE ACCOUNT</button>
+    </form>
+
+    <div class="auth-note">
+      🔒 Accounts are stored only in this browser (localStorage).
+      No data is sent anywhere. This is a play-money — real money, M-Pesa, withdrawals.
+    </div>
+
+    <div style="text-align:center;margin-top:14px;">
+      <a class="support-link" id="supportAuth" href="#" target="_blank" rel="noopener noreferrer">
+        💬 Contact Developer
+      </a>
     </div>
   </div>
-
-  <!-- ============ GAMES GRID ============ -->
-  <div class="grid">
-    <div class="game-card" data-game="rocket">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🚀</div>
-      <div>
-        <div class="name">Rocket Multiplier</div>
-        <div class="desc">Cash out before it flies away</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-game="dice">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🎲</div>
-      <div>
-        <div class="name">Dice Duel</div>
-        <div class="desc">Roll higher than the house</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-game="coin">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🪙</div>
-      <div>
-        <div class="name">Coin Flip</div>
-        <div class="desc">Heads or tails · 2x payout</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-game="spin">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🎰</div>
-      <div>
-        <div class="name">Lucky Spin</div>
-        <div class="desc">Spin to win up to 10x</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-game="color">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🎨</div>
-      <div>
-        <div class="name">Color Prediction</div>
-        <div class="desc">Red · Green · Violet</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-game="keno">
-      <span class="badge-live">LIVE DEMO</span>
-      <div class="icon">🔢</div>
-      <div>
-        <div class="name">Mini Keno</div>
-        <div class="desc">Pick 3 · Match to win</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ SESSION HISTORY ============ -->
-  <div class="history-list">
-    <h4>Session History</h4>
-    <div id="historyBox">
-      <div class="hrow"><span class="when">No plays yet — try a game above</span></div>
-    </div>
-    <button class="btn btn-danger" style="width:100%;margin-top:10px;font-size:12px;" id="resetBtn">Reset Demo (Restore 10,000)</button>
-  </div>
-
 </div>
 
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="brand">© 2026 SIR INNOCENT TECH</div>
-  <div>Powered by CHARLIE · Built with ⚡ technology</div>
-  <div class="links">
-    <a href="#privacy">Privacy</a> ·
-    <a href="#terms">Terms</a> ·
-    <a href="#contact">Contact</a>
-  </div>
-  <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.35);">
-    This is a simulated entertainment demo. No real money is accepted, held, or paid out.
-    If gambling is affecting you, seek help — it's a game, not an income.
-  </div>
-</footer>
+<!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+<div id="app">
+  <header class="header">
+    <h1><span class="text-grad">TOP-BET</span></h1>
+    <div class="tag">Powered by <b>MRS INNOCENT</b> · Created by <b>SIR INNOCENT TECH</b></div>
+    <div class="user-row">
+      <span>👤 <b id="userName">—</b></span>
+      <button class="logout-btn" id="logoutBtn" type="button">Logout</button>
+      <a class="support-link" id="supportMain" href="#" target="_blank" rel="noopener noreferrer">
+        💬 Contact Developer
+      </a>
+    </div>
+  </header>
 
-<!-- ============ GAME MODAL ============ -->
+  <div class="jackpot-bar">
+    <div>
+      <div class="lbl">Daily Jackpot</div>
+      <div class="amt" id="jackpotAmt">1,000.00</div>
+    </div>
+    <div class="desc">
+      Play-money prize<br>Grows on every bet
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="balance-bar">
+      <div class="stat gold">
+        <div class="lbl">Balance</div>
+        <div class="val" id="balance">500.00</div>
+      </div>
+      <div class="stat green">
+        <div class="lbl">Session P/L</div>
+        <div class="val" id="pl">0.00</div>
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-title live"><span class="dot"></span>Live Games (Simulated)</div>
+      <div class="shelf-scroll">
+        <div class="game-card red" data-game="dice">
+          <div class="icon">🎲</div>
+          <div><div class="name">Dice Duel</div><div class="desc">Roll higher · 2×</div></div>
+        </div>
+        <div class="game-card purple" data-game="coin">
+          <div class="icon">🪙</div>
+          <div><div class="name">Coin Flip</div><div class="desc">Heads or Tails · 2×</div></div>
+        </div>
+        <div class="game-card orange" data-game="spin">
+          <div class="icon">🎰</div>
+          <div><div class="name">Lucky Spin</div><div class="desc">Up to 10×</div></div>
+        </div>
+        <div class="game-card gold" data-game="color">
+          <div class="icon">🎨</div>
+          <div><div class="name">Color Predict</div><div class="desc">Red · Green · Violet</div></div>
+        </div>
+        <div class="game-card emerald" data-game="keno">
+          <div class="icon">🔢</div>
+          <div><div class="name">Mini Keno</div><div class="desc">Pick 3 · up to 10×</div></div>
+        </div>
+        <div class="game-card cyan" data-game="wheel">
+          <div class="icon">🎡</div>
+          <div><div class="name">Wheel of Fortune</div><div class="desc">Spin to win</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-title virtual"><span class="dot"></span>Virtuals</div>
+      <div class="shelf-scroll">
+        <div class="game-card gold" data-game="rocket">
+          <div class="icon">🚀</div>
+          <div><div class="name">Rocket Multiplier</div><div class="desc">1.00× → 100.00×</div></div>
+        </div>
+        <div class="game-card purple" data-game="horse">
+          <div class="icon">🐎</div>
+          <div><div class="name">Virtual Horse</div><div class="desc">Pick your runner</div></div>
+        </div>
+        <div class="game-card emerald" data-game="football">
+          <div class="icon">⚽</div>
+          <div><div class="name">Virtual Football</div><div class="desc">Pick a side</div></div>
+        </div>
+        <div class="game-card pink" data-game="crashball">
+          <div class="icon">🎈</div>
+          <div><div class="name">Crash Ball</div><div class="desc">Cash out before pop</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-title jackpot"><span class="dot"></span>Jackpot</div>
+      <div class="shelf-scroll">
+        <div class="game-card gold" data-game="jackpot">
+          <div class="icon">💎</div>
+          <div><div class="name">Daily Jackpot</div><div class="desc">Win the pool</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-list">
+      <h4>Session History</h4>
+      <div id="historyBox">
+        <div class="hrow"><span class="when">No plays yet — try a game above</span></div>
+      </div>
+      <button class="btn btn-danger" style="width:100%;margin-top:10px;font-size:12px;" id="resetBtn" type="button">Reset Demo (Restore 500)</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="brand">© 2026 SIR INNOCENT TECH</div>
+    <div>Powered by MRS INNOCENT</div>
+    <div class="links">
+      <a href="#privacy">Privacy</a> ·
+      <a href="#terms">Terms</a> ·
+      <a href="#contact" id="supportFooter">Contact</a>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.35);">
+      Play-money simulation. real money. If gambling is affecting you, seek help.
+    </div>
+  </footer>
+</div>
+
 <div class="modal" id="modal">
   <div class="game-panel">
     <div class="head">
       <h3 id="gameTitle">Game</h3>
-      <button class="close-btn" id="closeModal">×</button>
+      <button class="close-btn" id="closeModal" type="button">×</button>
     </div>
     <div id="gameBody"></div>
   </div>
 </div>
 
-<!-- ============ TOAST ============ -->
 <div class="toast" id="toast"></div>
 
-<!-- ============================================================
-   APP LOGIC
-   ============================================================ -->
 <script>
 (function () {
   'use strict';
 
-  /* ---------- State ---------- */
-  const START_BALANCE = 10000;
+  /* ============================================================
+     SUPPORT LINK — number is not displayed in UI
+     ============================================================ */
+  const SUPPORT_LINK = 'https://wa.me/254702118986';
+  function applySupportLink(el) {
+    if (!el) return;
+    el.href = SUPPORT_LINK;
+    el.target = '_blank';
+    el.rel = 'noopener noreferrer';
+  }
+  ['supportAuth', 'supportMain', 'supportFooter'].forEach(id => {
+    applySupportLink(document.getElementById(id));
+  });
+
+  /* ============================================================
+     AUTH
+     ============================================================ */
+  const AUTH_KEY = 'topbet.users.v1';
+  const SESSION_KEY = 'topbet.session.v1';
+  const START_BALANCE = 500;
+
+  function loadUsers() {
+    try { return JSON.parse(localStorage.getItem(AUTH_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveUsers(u) { localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
+  function getSession() {
+    try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); }
+    catch { return null; }
+  }
+  function setSession(s) {
+    if (s) localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+    else localStorage.removeItem(SESSION_KEY);
+  }
+
+  function validSafaricom(raw) {
+    const v = String(raw || '').replace(/\s+/g, '');
+    return /^(?:\+?254|0)(?:7\d{8}|1\d{8})$/.test(v);
+  }
+  function normalizeSafaricom(raw) {
+    let v = String(raw || '').replace(/\s+/g, '');
+    v = v.replace(/^\+/, '');
+    if (v.startsWith('0')) v = '254' + v.slice(1);
+    return '+' + v;
+  }
+  function validGmail(raw) {
+    const v = String(raw || '').trim().toLowerCase();
+    return /^[a-z0-9](?:[a-z0-9._-]{0,28})@gmail\.com$/.test(v);
+  }
+
+  const $auth = document.getElementById('authScreen');
+  const $app = document.getElementById('app');
+  const $authForm = document.getElementById('authForm');
+  const $authError = document.getElementById('authError');
+  const $authSubmit = document.getElementById('authSubmit');
+  const $signupOnly = document.getElementById('signupOnly');
+  const $loginOnly = document.getElementById('loginOnly');
+  const $confirmField = document.getElementById('confirmField');
+  const $safField = document.getElementById('safField');
+  const $gmailField = document.getElementById('gmailField');
+  const $safNumber = document.getElementById('safNumber');
+  const $gmailAddress = document.getElementById('gmailAddress');
+  const $loginId = document.getElementById('loginId');
+  const $password = document.getElementById('password');
+  const $password2 = document.getElementById('password2');
+  const $safHint = document.getElementById('safHint');
+  const $gmailHint = document.getElementById('gmailHint');
+  const $pwHint = document.getElementById('pwHint');
+  const $pw2Hint = document.getElementById('pw2Hint');
+  const $loginHint = document.getElementById('loginHint');
+
+  let authMode = 'signup';
+  let signupIdType = 'safaricom';
+
+  document.querySelectorAll('.auth-tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.auth-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      authMode = t.dataset.tab;
+      applyAuthMode();
+    });
+  });
+  function applyAuthMode() {
+    $authError.classList.remove('show');
+    if (authMode === 'signup') {
+      $signupOnly.style.display = '';
+      $loginOnly.style.display = 'none';
+      $confirmField.style.display = '';
+      $authSubmit.textContent = 'CREATE ACCOUNT';
+    } else {
+      $signupOnly.style.display = 'none';
+      $loginOnly.style.display = '';
+      $confirmField.style.display = 'none';
+      $authSubmit.textContent = 'LOGIN';
+    }
+  }
+  document.querySelectorAll('.toggle-opt').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.toggle-opt').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      signupIdType = t.dataset.idtype;
+      $safField.style.display = signupIdType === 'safaricom' ? '' : 'none';
+      $gmailField.style.display = signupIdType === 'gmail' ? '' : 'none';
+    });
+  });
+
+  function showError(msg) {
+    $authError.textContent = msg;
+    $authError.classList.add('show');
+  }
+
+  $authForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    $authError.classList.remove('show');
+
+    const pw = $password.value;
+    if (pw.length < 6) return showError('Password must be at least 6 characters.');
+    const users = loadUsers();
+
+    if (authMode === 'signup') {
+      let idKey, display;
+      if (signupIdType === 'safaricom') {
+        if (!validSafaricom($safNumber.value)) return showError('Enter a valid Safaricom number (07XX XXX XXX).');
+        idKey = 'phone:' + normalizeSafaricom($safNumber.value);
+        display = normalizeSafaricom($safNumber.value);
+      } else {
+        if (!validGmail($gmailAddress.value)) return showError('Enter a valid @gmail.com address.');
+        idKey = 'email:' + $gmailAddress.value.trim().toLowerCase();
+        display = $gmailAddress.value.trim().toLowerCase();
+      }
+      if ($password.value !== $password2.value) return showError('Passwords do not match.');
+      if (users[idKey]) return showError('An account with this identifier already exists. Please login.');
+      users[idKey] = { idKey, display, password: pw, balance: START_BALANCE, createdAt: Date.now() };
+      saveUsers(users);
+      setSession({ idKey, display });
+      enterApp();
+      return;
+    }
+
+    const raw = $loginId.value.trim();
+    let idKey;
+    if (validSafaricom(raw)) idKey = 'phone:' + normalizeSafaricom(raw);
+    else if (validGmail(raw)) idKey = 'email:' + raw.toLowerCase();
+    else return showError('Enter a valid Safaricom number or @gmail.com address.');
+
+    const u = users[idKey];
+    if (!u) return showError('No account found. Please sign up first.');
+    if (u.password !== pw) return showError('Incorrect password.');
+    setSession({ idKey, display: u.display });
+    enterApp();
+  });
+
+  $safNumber.addEventListener('input', function () {
+    const ok = validSafaricom($safNumber.value);
+    $safHint.textContent = ok ? '✓ Valid Safaricom number' : 'Format: 07XX XXX XXX or 2547XXXXXXXX';
+    $safHint.className = 'auth-hint ' + (ok ? 'ok' : '');
+    $safNumber.classList.toggle('valid', ok);
+  });
+  $gmailAddress.addEventListener('input', function () {
+    const ok = validGmail($gmailAddress.value);
+    $gmailHint.textContent = ok ? '✓ Valid Gmail address' : 'Must be a valid @gmail.com address';
+    $gmailHint.className = 'auth-hint ' + (ok ? 'ok' : '');
+    $gmailAddress.classList.toggle('valid', ok);
+  });
+  $loginId.addEventListener('input', function () {
+    const ok = validSafaricom($loginId.value) || validGmail($loginId.value);
+    $loginHint.textContent = ok ? '✓ Recognised' : 'Use whatever you signed up with';
+    $loginHint.className = 'auth-hint ' + (ok ? 'ok' : '');
+  });
+  $password.addEventListener('input', function () {
+    const ok = $password.value.length >= 6;
+    $pwHint.textContent = ok ? '✓ Good' : 'Minimum 6 characters';
+    $pwHint.className = 'auth-hint ' + (ok ? 'ok' : '');
+  });
+  $password2.addEventListener('input', function () {
+    const ok = $password2.value && $password2.value === $password.value;
+    $pw2Hint.textContent = ok ? '✓ Passwords match' : 'Must match above';
+    $pw2Hint.className = 'auth-hint ' + (ok ? 'ok' : '');
+  });
+
+  /* ============================================================
+     APP STATE
+     ============================================================ */
+  let session = null;
+  let users = {};
   let balance = START_BALANCE;
+  let jackpot = 1000;
   const history = [];
 
-  /* ---------- DOM ---------- */
-  const $balance = document.getElementById('balance');
-  const $pl = document.getElementById('pl');
-  const $modal = document.getElementById('modal');
-  const $gameTitle = document.getElementById('gameTitle');
-  const $gameBody = document.getElementById('gameBody');
-  const $historyBox = document.getElementById('historyBox');
-  const $toast = document.getElementById('toast');
+  function currentUser() { return users[session.idKey]; }
+  function persistUser() {
+    users[session.idKey].balance = balance;
+    saveUsers(users);
+  }
 
   function fmt(n) {
     return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
+  const $balance = document.getElementById('balance');
+  const $pl = document.getElementById('pl');
+  const $jackpotAmt = document.getElementById('jackpotAmt');
+  const $userName = document.getElementById('userName');
+  const $historyBox = document.getElementById('historyBox');
+  const $toast = document.getElementById('toast');
+
   function updateBalance() {
     $balance.textContent = fmt(balance);
     const pl = balance - START_BALANCE;
     $pl.textContent = (pl >= 0 ? '+' : '') + fmt(pl);
     $pl.style.color = pl >= 0 ? 'var(--emerald)' : '#fca5a5';
+    persistUser();
+  }
+  function updateJackpot() { $jackpotAmt.textContent = fmt(jackpot); }
+  function addJackpot(amount) {
+    jackpot += amount;
+    updateJackpot();
+    $jackpotAmt.classList.add('bump');
+    setTimeout(() => $jackpotAmt.classList.remove('bump'), 400);
   }
 
   let toastTimer;
@@ -570,7 +1066,7 @@ body {
     renderHistory();
   }
   function renderHistory() {
-    if (history.length === 0) {
+    if (!history.length) {
       $historyBox.innerHTML = '<div class="hrow"><span class="when">No plays yet — try a game above</span></div>';
       return;
     }
@@ -592,7 +1088,36 @@ body {
     return Math.round(v * 100) / 100;
   }
 
-  /* ---------- Modal ---------- */
+  function enterApp() {
+    session = getSession();
+    if (!session) { $auth.classList.remove('hidden'); return; }
+    users = loadUsers();
+    const u = currentUser();
+    if (!u) { setSession(null); $auth.classList.remove('hidden'); return; }
+    balance = typeof u.balance === 'number' ? u.balance : START_BALANCE;
+    $userName.textContent = session.display;
+    $auth.classList.add('hidden');
+    $app.classList.add('visible');
+    updateBalance();
+    updateJackpot();
+    renderHistory();
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', function () {
+    setSession(null);
+    $app.classList.remove('visible');
+    $auth.classList.remove('hidden');
+    $password.value = ''; $password2.value = '';
+    $safNumber.value = ''; $gmailAddress.value = ''; $loginId.value = '';
+  });
+
+  /* ============================================================
+     MODAL
+     ============================================================ */
+  const $modal = document.getElementById('modal');
+  const $gameTitle = document.getElementById('gameTitle');
+  const $gameBody = document.getElementById('gameBody');
+
   function openModal(title) {
     $gameTitle.textContent = title;
     $modal.classList.add('open');
@@ -605,22 +1130,21 @@ body {
   $modal.addEventListener('click', function (e) { if (e.target === $modal) closeModal(); });
   document.getElementById('closeModal').addEventListener('click', closeModal);
 
-  /* ---------- Shared stake controls HTML ---------- */
-  function stakeControls(id, maxBet) {
+  function stakeControls(id) {
     return `
       <div class="stake-row">
-        <input type="number" class="input" id="${id}Stake" value="100" min="1" step="1" />
+        <input type="number" class="input" id="${id}Stake" value="50" min="1" step="1" />
       </div>
       <div class="chip-row">
+        <div class="chip" data-stake="25">25</div>
         <div class="chip" data-stake="50">50</div>
         <div class="chip" data-stake="100">100</div>
-        <div class="chip" data-stake="500">500</div>
-        <div class="chip" data-stake="1000">1K</div>
+        <div class="chip" data-stake="250">250</div>
       </div>
     `;
   }
   function wireChips(scope) {
-    scope.querySelectorAll('.chip').forEach(function (c) {
+    scope.querySelectorAll('.chip[data-stake]').forEach(function (c) {
       c.addEventListener('click', function () {
         const inp = scope.querySelector('.stake-row .input');
         if (inp) inp.value = c.dataset.stake;
@@ -631,100 +1155,16 @@ body {
   }
 
   /* ============================================================
-     GAME 1: ROCKET MULTIPLIER
+     GAME: ROCKET MULTIPLIER
      ============================================================ */
   let rocketTimer = null;
   let rocketState = { running: false, cashed: false, mult: 1, stake: 0 };
-
-  function launchRocket() {
-    let crashed = false;
-    let mult = 1.00;
-    let elapsed = 0;
-    let curvePts = [[0, 220]];
-    rocketState = { running: true, cashed: false, mult: 1, stake: 0 };
-
-    const stage = document.getElementById('rocketStage');
-    const $num = document.getElementById('multNum');
-    const $state = document.getElementById('multState');
-    const $rocket = document.getElementById('rocketEmoji');
-    const $path = document.getElementById('curvePath');
-    const $fill = document.getElementById('curveFill');
-    const $startBtn = document.getElementById('startBtn');
-    const $cashBtn = document.getElementById('cashBtn');
-    const $stake = document.getElementById('rocketStake');
-
-    const stake = parseStake($stake);
-    if (!stake) { toast('Enter a valid stake', 'lose'); return; }
-
-    balance -= stake; updateBalance();
-    rocketState.stake = stake;
-    $num.textContent = '1.00×';
-    $state.textContent = 'In flight…';
-    $startBtn.disabled = true;
-    $cashBtn.disabled = false;
-    $num.parentElement.classList.remove('crashed');
-    $rocket.style.left = '8%';
-    $rocket.style.top = '85%';
-    $path.setAttribute('d', 'M 0 220');
-    $fill.setAttribute('d', '');
-
-    // Simulated flight — NOT a real RNG, purely cosmetic random curve
-    rocketTimer = setInterval(function () {
-      elapsed += 80;
-      // Slight upward bias then crash chance grows over time
-      const step = 0.05 + Math.random() * 0.15 + mult * 0.008;
-      mult += step;
-
-      const crashProb = Math.min(0.9, 0.004 * Math.pow(mult, 2.2));
-      if (Math.random() < crashProb || mult >= 20) {
-        crashed = true;
-        clearInterval(rocketTimer); rocketTimer = null;
-        $num.textContent = mult.toFixed(2) + '×';
-        $num.parentElement.classList.add('crashed');
-        $state.textContent = 'FLEW AWAY';
-        $startBtn.disabled = false;
-        $cashBtn.disabled = true;
-        rocketState.running = false;
-
-        if (!rocketState.cashed) {
-          toast('Flew away! Lost ' + fmt(stake), 'lose');
-          addHistory('Rocket · flew away at ' + mult.toFixed(2) + '×', -stake);
-        }
-        return;
-      }
-
-      $num.textContent = mult.toFixed(2) + '×';
-      rocketState.mult = mult;
-
-      // Move rocket along rising curve
-      const x = Math.min(88, 8 + (mult - 1) * 4.5);
-      const y = Math.max(12, 85 - (mult - 1) * 5.5);
-      $rocket.style.left = x + '%';
-      $rocket.style.top = y + '%';
-
-      // Update SVG curve
-      curvePts.push([x * 4.6, y * 2.2]);
-      if (curvePts.length > 200) curvePts.shift();
-      const d = curvePts.map((p, i) => (i === 0 ? 'M ' : 'L ') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
-      $path.setAttribute('d', d);
-      $fill.setAttribute('d', d + ' L 460 220 L 0 220 Z');
-    }, 80);
-  }
-
-  function cashOutRocket() {
-    if (!rocketState.running || rocketState.cashed) return;
-    const win = +(rocketState.stake * rocketState.mult).toFixed(2);
-    const profit = +(win - rocketState.stake).toFixed(2);
-    balance += win; updateBalance();
-    rocketState.cashed = true;
-    document.getElementById('cashBtn').disabled = true;
-    toast('Cashed out at ' + rocketState.mult.toFixed(2) + '× → +' + fmt(profit), 'win');
-    addHistory('Rocket · cashed out at ' + rocketState.mult.toFixed(2) + '×', profit);
-  }
+  let crashHistory = [];
 
   function renderRocket() {
     openModal('🚀 Rocket Multiplier');
     $gameBody.innerHTML = `
+      <div class="crash-history" id="crashHist"></div>
       <div class="rocket-stage" id="rocketStage">
         <svg class="curve-svg" viewBox="0 0 460 220" preserveAspectRatio="none">
           <defs>
@@ -750,20 +1190,115 @@ body {
       <div class="game-controls">
         ${stakeControls('rocket')}
         <div class="action-row">
-          <button class="btn btn-primary" id="startBtn">🚀 LAUNCH</button>
-          <button class="btn btn-cashout" id="cashBtn" disabled>💰 CASH OUT</button>
+          <button class="btn btn-primary" id="startBtn" type="button">🚀 LAUNCH</button>
+          <button class="btn btn-cashout" id="cashBtn" type="button" disabled>💰 CASH OUT</button>
         </div>
-        <div class="hist-row" id="rocketHist"></div>
       </div>
     `;
     wireChips($gameBody);
+    renderCrashHist();
     document.getElementById('startBtn').addEventListener('click', launchRocket);
     document.getElementById('cashBtn').addEventListener('click', cashOutRocket);
   }
 
-  /* ============================================================
-     GAME 2: DICE DUEL
-     ============================================================ */
+  function renderCrashHist() {
+    const el = document.getElementById('crashHist');
+    if (!el) return;
+    if (!crashHistory.length) {
+      el.innerHTML = '<span style="font-size:11px;color:rgba(255,255,255,0.4);">No crashes yet — launch to start</span>';
+      return;
+    }
+    el.innerHTML = crashHistory.slice(0, 12).map(function (m) {
+      const cls = m >= 10 ? 'high' : m < 2 ? 'low' : '';
+      return '<span class="crash-chip ' + cls + '">' + m.toFixed(2) + '×</span>';
+    }).join('');
+  }
+
+  function launchRocket() {
+    let mult = 1.00;
+    let curvePts = [[0, 220]];
+    rocketState = { running: true, cashed: false, mult: 1, stake: 0 };
+
+    const $num = document.getElementById('multNum');
+    const $state = document.getElementById('multState');
+    const $rocket = document.getElementById('rocketEmoji');
+    const $path = document.getElementById('curvePath');
+    const $fill = document.getElementById('curveFill');
+    const $startBtn = document.getElementById('startBtn');
+    const $cashBtn = document.getElementById('cashBtn');
+    const $stake = document.getElementById('rocketStake');
+
+    const stake = parseStake($stake);
+    if (!stake) { toast('Enter a valid stake', 'lose'); return; }
+
+    balance -= stake;
+    updateBalance();
+    addJackpot(stake * 0.02);
+    rocketState.stake = stake;
+    $num.textContent = '1.00×';
+    $state.textContent = 'In flight…';
+    $startBtn.disabled = true;
+    $cashBtn.disabled = false;
+    $num.parentElement.classList.remove('crashed');
+    $rocket.style.left = '8%';
+    $rocket.style.top = '85%';
+    $path.setAttribute('d', 'M 0 220');
+    $fill.setAttribute('d', '');
+
+    const target = Math.min(100, Math.max(1.0, Math.exp(Math.random() * Math.log(100))));
+    const crashAt = Math.round(target * 100) / 100;
+
+    rocketTimer = setInterval(function () {
+      const step = 0.02 + mult * 0.006 + Math.random() * 0.04;
+      mult = Math.round((mult + step) * 100) / 100;
+
+      if (mult >= crashAt || mult >= 100) {
+        mult = Math.min(crashAt, 100);
+        clearInterval(rocketTimer); rocketTimer = null;
+        rocketState.running = false;
+        $num.textContent = mult.toFixed(2) + '×';
+        $num.parentElement.classList.add('crashed');
+        $state.textContent = 'FLEW AWAY';
+        $startBtn.disabled = false;
+        $cashBtn.disabled = true;
+        crashHistory.unshift(mult);
+        if (crashHistory.length > 20) crashHistory.pop();
+        renderCrashHist();
+        if (!rocketState.cashed) {
+          toast('Flew away at ' + mult.toFixed(2) + '× · lost ' + fmt(stake), 'lose');
+          addHistory('Rocket · crashed @ ' + mult.toFixed(2) + '×', -stake);
+        }
+        return;
+      }
+
+      $num.textContent = mult.toFixed(2) + '×';
+      rocketState.mult = mult;
+      const norm = Math.log(mult) / Math.log(100);
+      const x = 8 + norm * 80;
+      const y = 85 - norm * 73;
+      $rocket.style.left = x + '%';
+      $rocket.style.top = y + '%';
+      curvePts.push([x * 4.6, y * 2.2]);
+      if (curvePts.length > 200) curvePts.shift();
+      const d = curvePts.map((p, i) => (i === 0 ? 'M ' : 'L ') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+      $path.setAttribute('d', d);
+      $fill.setAttribute('d', d + ' L 460 220 L 0 220 Z');
+    }, 80);
+  }
+
+  function cashOutRocket() {
+    if (!rocketState.running || rocketState.cashed) return;
+    const win = +(rocketState.stake * rocketState.mult).toFixed(2);
+    const profit = +(win - rocketState.stake).toFixed(2);
+    balance += win;
+    updateBalance();
+    rocketState.cashed = true;
+    document.getElementById('cashBtn').disabled = true;
+    toast('Cashed out at ' + rocketState.mult.toFixed(2) + '× → +' + fmt(profit), 'win');
+    addHistory('Rocket · cashed @ ' + rocketState.mult.toFixed(2) + '×', profit);
+  }
+
+  /* DICE */
   function renderDice() {
     openModal('🎲 Dice Duel');
     $gameBody.innerHTML = `
@@ -780,7 +1315,7 @@ body {
       </div>
       <div id="diceResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
       ${stakeControls('dice')}
-      <button class="btn btn-primary" id="rollBtn" style="width:100%;">🎲 ROLL DICE</button>
+      <button class="btn btn-primary" id="rollBtn" type="button" style="width:100%;">🎲 ROLL DICE</button>
     `;
     wireChips($gameBody);
     document.getElementById('rollBtn').addEventListener('click', function () {
@@ -788,37 +1323,37 @@ body {
       if (!stake) { toast('Enter a valid stake', 'lose'); return; }
       const roll = () => 1 + Math.floor(Math.random() * 6);
       const you = roll(), house = roll();
-      document.getElementById('diceYou').textContent = '⚀⚁⚂⚃⚄⚅'[you - 1];
-      document.getElementById('diceHouse').textContent = '⚀⚁⚂⚃⚄⚅'[house - 1];
+      const faces = '⚀⚁⚂⚃⚄⚅';
+      document.getElementById('diceYou').textContent = faces[you - 1];
+      document.getElementById('diceHouse').textContent = faces[house - 1];
       const $res = document.getElementById('diceResult');
+      addJackpot(stake * 0.02);
       if (you > house) {
         balance += stake; updateBalance();
-        $res.textContent = `You rolled ${you} vs ${house} — YOU WIN +${fmt(stake)}`;
+        $res.textContent = 'You rolled ' + you + ' vs ' + house + ' — YOU WIN +' + fmt(stake);
         $res.style.color = 'var(--emerald)';
         toast('You win! +' + fmt(stake), 'win');
-        addHistory(`Dice · ${you} vs ${house} · WIN`, stake);
+        addHistory('Dice · ' + you + ' vs ' + house + ' · WIN', stake);
       } else if (you < house) {
         balance -= stake; updateBalance();
-        $res.textContent = `You rolled ${you} vs ${house} — House wins -${fmt(stake)}`;
+        $res.textContent = 'You rolled ' + you + ' vs ' + house + ' — House wins -' + fmt(stake);
         $res.style.color = '#fca5a5';
         toast('House wins -' + fmt(stake), 'lose');
-        addHistory(`Dice · ${you} vs ${house} · LOSS`, -stake);
+        addHistory('Dice · ' + you + ' vs ' + house + ' · LOSS', -stake);
       } else {
-        $res.textContent = `Tie at ${you} — stake returned`;
+        $res.textContent = 'Tie at ' + you + ' — stake returned';
         $res.style.color = 'var(--gold)';
         toast('Tie — stake returned');
-        addHistory(`Dice · ${you} vs ${house} · PUSH`, 0);
+        addHistory('Dice · ' + you + ' vs ' + house + ' · PUSH', 0);
       }
     });
   }
 
-  /* ============================================================
-     GAME 3: COIN FLIP
-     ============================================================ */
+  /* COIN */
   function renderCoin() {
     openModal('🪙 Coin Flip');
     $gameBody.innerHTML = `
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick a side. 50/50 · win pays 2×.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick a side. Win pays 2×.</p>
       <div style="text-align:center;font-size:80px;margin:16px 0;" id="coinFace">🪙</div>
       <div id="coinResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
       <div class="chip-row" style="margin-bottom:12px;">
@@ -826,7 +1361,7 @@ body {
         <div class="chip" data-side="tails">TAILS</div>
       </div>
       ${stakeControls('coin')}
-      <button class="btn btn-primary" id="flipBtn" style="width:100%;">🪙 FLIP COIN</button>
+      <button class="btn btn-primary" id="flipBtn" type="button" style="width:100%;">🪙 FLIP COIN</button>
     `;
     wireChips($gameBody);
     let side = 'heads';
@@ -841,28 +1376,26 @@ body {
       const stake = parseStake(document.getElementById('coinStake'));
       if (!stake) { toast('Enter a valid stake', 'lose'); return; }
       const result = Math.random() < 0.5 ? 'heads' : 'tails';
-      const $face = document.getElementById('coinFace');
-      $face.textContent = result === 'heads' ? '👑' : '🌙';
+      document.getElementById('coinFace').textContent = result === 'heads' ? '👑' : '🌙';
       const $res = document.getElementById('coinResult');
+      addJackpot(stake * 0.02);
       if (result === side) {
         balance += stake; updateBalance();
-        $res.textContent = `Landed on ${result.toUpperCase()} — YOU WIN +${fmt(stake)}`;
+        $res.textContent = 'Landed on ' + result.toUpperCase() + ' — YOU WIN +' + fmt(stake);
         $res.style.color = 'var(--emerald)';
         toast('You win! +' + fmt(stake), 'win');
-        addHistory(`Coin · ${result} · WIN`, stake);
+        addHistory('Coin · ' + result + ' · WIN', stake);
       } else {
         balance -= stake; updateBalance();
-        $res.textContent = `Landed on ${result.toUpperCase()} — Lost -${fmt(stake)}`;
+        $res.textContent = 'Landed on ' + result.toUpperCase() + ' — Lost -' + fmt(stake);
         $res.style.color = '#fca5a5';
         toast('Lost -' + fmt(stake), 'lose');
-        addHistory(`Coin · ${result} · LOSS`, -stake);
+        addHistory('Coin · ' + result + ' · LOSS', -stake);
       }
     });
   }
 
-  /* ============================================================
-     GAME 4: LUCKY SPIN
-     ============================================================ */
+  /* SPIN */
   function renderSpin() {
     openModal('🎰 Lucky Spin');
     $gameBody.innerHTML = `
@@ -870,57 +1403,53 @@ body {
       <div style="text-align:center;font-size:80px;margin:16px 0;" id="spinFace">🎰</div>
       <div id="spinResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
       ${stakeControls('spin')}
-      <button class="btn btn-primary" id="spinBtn" style="width:100%;">🎰 SPIN</button>
+      <button class="btn btn-primary" id="spinBtn" type="button" style="width:100%;">🎰 SPIN</button>
     `;
     wireChips($gameBody);
     document.getElementById('spinBtn').addEventListener('click', function () {
       const stake = parseStake(document.getElementById('spinStake'));
       if (!stake) { toast('Enter a valid stake', 'lose'); return; }
-      // weighted outcome: 0x (40%), 0.5x (20%), 1x (20%), 2x (10%), 5x (7%), 10x (3%)
-      const roll = Math.random();
+      const r = Math.random();
       let mult;
-      if (roll < 0.40) mult = 0;
-      else if (roll < 0.60) mult = 0.5;
-      else if (roll < 0.80) mult = 1;
-      else if (roll < 0.90) mult = 2;
-      else if (roll < 0.97) mult = 5;
+      if (r < 0.40) mult = 0;
+      else if (r < 0.60) mult = 0.5;
+      else if (r < 0.80) mult = 1;
+      else if (r < 0.90) mult = 2;
+      else if (r < 0.97) mult = 5;
       else mult = 10;
-
       const payout = +(stake * mult).toFixed(2);
       const net = +(payout - stake).toFixed(2);
       balance += net; updateBalance();
-      document.getElementById('spinFace').textContent = ['💨', '🙂', '😀', '🤩', '🔥', '💎'][
-        mult === 0 ? 0 : mult === 0.5 ? 1 : mult === 1 ? 2 : mult === 2 ? 3 : mult === 5 ? 4 : 5
-      ];
+      addJackpot(stake * 0.02);
+      document.getElementById('spinFace').textContent =
+        mult === 0 ? '💨' : mult === 0.5 ? '🙂' : mult === 1 ? '😀' : mult === 2 ? '🤩' : mult === 5 ? '🔥' : '💎';
       const $res = document.getElementById('spinResult');
       if (mult === 0) {
-        $res.textContent = `No win — lost ${fmt(stake)}`;
+        $res.textContent = 'No win — lost ' + fmt(stake);
         $res.style.color = '#fca5a5';
         toast('No win', 'lose');
-        addHistory(`Spin · 0×`, -stake);
+        addHistory('Spin · 0×', -stake);
       } else if (mult === 1) {
-        $res.textContent = `Push at 1× — stake returned`;
+        $res.textContent = 'Push at 1× — stake returned';
         $res.style.color = 'var(--gold)';
         toast('Push');
-        addHistory(`Spin · 1× · PUSH`, 0);
+        addHistory('Spin · 1× · PUSH', 0);
       } else {
-        $res.textContent = `${mult}× — YOU WIN +${fmt(net)}`;
+        $res.textContent = mult + '× — YOU WIN +' + fmt(net);
         $res.style.color = 'var(--emerald)';
         toast('You win! +' + fmt(net), 'win');
-        addHistory(`Spin · ${mult}× · WIN`, net);
+        addHistory('Spin · ' + mult + '× · WIN', net);
       }
     });
   }
 
-  /* ============================================================
-     GAME 5: COLOR PREDICTION
-     ============================================================ */
+  /* COLOR */
   function renderColor() {
     openModal('🎨 Color Prediction');
     $gameBody.innerHTML = `
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick a color. Green/Red pay 2×, Violet pays 4.5×.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Green/Red pay 2× · Violet pays 4.5×.</p>
       <div style="display:flex;justify-content:center;margin:20px 0;">
-        <div style="width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;transition:all .3s;" id="colorBall">❓</div>
+        <div id="colorBall" style="width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;transition:all .3s;background:rgba(255,255,255,0.05);">❓</div>
       </div>
       <div id="colorResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
       <div class="chip-row" style="margin-bottom:12px;">
@@ -929,7 +1458,7 @@ body {
         <div class="chip" data-col="violet" style="border-color:rgba(124,58,237,0.4);">VIOLET · 4.5×</div>
       </div>
       ${stakeControls('color')}
-      <button class="btn btn-primary" id="colorBtn" style="width:100%;">🎨 PREDICT</button>
+      <button class="btn btn-primary" id="colorBtn" type="button" style="width:100%;">🎨 PREDICT</button>
     `;
     wireChips($gameBody);
     let pick = 'green';
@@ -943,7 +1472,6 @@ body {
     document.getElementById('colorBtn').addEventListener('click', function () {
       const stake = parseStake(document.getElementById('colorStake'));
       if (!stake) { toast('Enter a valid stake', 'lose'); return; }
-      // outcome: green 45%, red 45%, violet 10%
       const r = Math.random();
       const result = r < 0.45 ? 'green' : r < 0.90 ? 'red' : 'violet';
       const colorMap = { green: '#10B981', red: '#EF4444', violet: '#7C3AED' };
@@ -951,44 +1479,44 @@ body {
       ball.textContent = { green: '🟢', red: '🔴', violet: '🟣' }[result];
       ball.style.background = colorMap[result] + '33';
       ball.style.boxShadow = '0 0 40px ' + colorMap[result] + '88';
+      addJackpot(stake * 0.02);
       const mult = result === 'violet' ? 4.5 : 2;
       const $res = document.getElementById('colorResult');
       if (result === pick) {
         const win = +(stake * mult).toFixed(2);
         const net = +(win - stake).toFixed(2);
         balance += net; updateBalance();
-        $res.textContent = `${result.toUpperCase()} · ${mult}× — YOU WIN +${fmt(net)}`;
+        $res.textContent = result.toUpperCase() + ' · ' + mult + '× — YOU WIN +' + fmt(net);
         $res.style.color = 'var(--emerald)';
         toast('You win! +' + fmt(net), 'win');
-        addHistory(`Color · ${result} · WIN`, net);
+        addHistory('Color · ' + result + ' · WIN', net);
       } else {
         balance -= stake; updateBalance();
-        $res.textContent = `${result.toUpperCase()} — Lost ${fmt(stake)}`;
+        $res.textContent = result.toUpperCase() + ' — Lost ' + fmt(stake);
         $res.style.color = '#fca5a5';
         toast('Lost ' + fmt(stake), 'lose');
-        addHistory(`Color · ${result} · LOSS`, -stake);
+        addHistory('Color · ' + result + ' · LOSS', -stake);
       }
     });
   }
 
-  /* ============================================================
-     GAME 6: MINI KENO
-     ============================================================ */
+  /* KENO */
   function renderKeno() {
     openModal('🔢 Mini Keno');
     const pool = Array.from({ length: 30 }, (_, i) => i + 1);
     $gameBody.innerHTML = `
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick 3 numbers from 1–30. Match 3 = 10× · Match 2 = 2× · Match 1 = 0.5×.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick 3 from 1–30. 3 match = 10× · 2 = 2× · 1 = 0.5×.</p>
       <div id="kenoGrid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px;"></div>
-      <div id="kenoResult" style="text-align:center;font-weight:700;font-size:14px;margin-bottom:12px;min-height:20px;"></div>
+      <div id="kenoResult" style="text-align:center;font-weight:700;font-size:13px;margin-bottom:12px;min-height:20px;"></div>
       ${stakeControls('keno')}
-      <button class="btn btn-primary" id="kenoBtn" style="width:100%;">🔢 DRAW</button>
+      <button class="btn btn-primary" id="kenoBtn" type="button" style="width:100%;">🔢 DRAW</button>
     `;
     wireChips($gameBody);
     const picks = new Set();
     const $grid = document.getElementById('kenoGrid');
     pool.forEach(function (n) {
       const b = document.createElement('button');
+      b.type = 'button';
       b.textContent = n;
       b.className = 'chip';
       b.style.padding = '10px 0';
@@ -1006,8 +1534,6 @@ body {
       if (picks.size !== 3) { toast('Pick exactly 3 numbers', 'lose'); return; }
       const stake = parseStake(document.getElementById('kenoStake'));
       if (!stake) { toast('Enter a valid stake', 'lose'); return; }
-
-      // Draw 5 unique numbers from 30
       const draw = [];
       const copy = pool.slice();
       for (let i = 0; i < 5; i++) {
@@ -1019,8 +1545,6 @@ body {
       if (matches === 3) mult = 10;
       else if (matches === 2) mult = 2;
       else if (matches === 1) mult = 0.5;
-
-      // highlight drawn numbers
       $grid.querySelectorAll('button').forEach(function (b) {
         const n = +b.dataset.n;
         if (draw.includes(n)) {
@@ -1031,36 +1555,284 @@ body {
           b.style.background = 'rgba(16,185,129,0.3)';
         }
       });
-
       const payout = +(stake * mult).toFixed(2);
       const net = +(payout - stake).toFixed(2);
       balance += net; updateBalance();
+      addJackpot(stake * 0.02);
       const $res = document.getElementById('kenoResult');
       const drawStr = 'Drawn: ' + draw.join(', ');
       if (mult > 0) {
-        $res.innerHTML = `${drawStr}<br>${matches} match${matches > 1 ? 'es' : ''} · ${mult}× → +${fmt(net)}`;
+        $res.innerHTML = drawStr + '<br>' + matches + ' match' + (matches > 1 ? 'es' : '') + ' · ' + mult + '× → +' + fmt(net);
         $res.style.color = 'var(--emerald)';
         toast('You win! +' + fmt(net), 'win');
-        addHistory(`Keno · ${matches} match · WIN`, net);
+        addHistory('Keno · ' + matches + ' match · WIN', net);
       } else {
-        $res.innerHTML = `${drawStr}<br>No matches · -${fmt(stake)}`;
+        $res.innerHTML = drawStr + '<br>No matches · -' + fmt(stake);
         $res.style.color = '#fca5a5';
         toast('No matches -' + fmt(stake), 'lose');
-        addHistory(`Keno · 0 match · LOSS`, -stake);
+        addHistory('Keno · 0 match · LOSS', -stake);
       }
     });
   }
 
-  /* ============================================================
-     WIRE UP GAME CARDS
-     ============================================================ */
+  /* WHEEL */
+  function renderWheel() {
+    openModal('🎡 Wheel of Fortune');
+    $gameBody.innerHTML = `
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Spin the wheel. Multipliers 0× · 0.5× · 1× · 2× · 3× · 5×.</p>
+      <div style="text-align:center;font-size:80px;margin:16px 0;transition:transform 1s;" id="wheelFace">🎡</div>
+      <div id="wheelResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
+      ${stakeControls('wheel')}
+      <button class="btn btn-primary" id="wheelBtn" type="button" style="width:100%;">🎡 SPIN WHEEL</button>
+    `;
+    wireChips($gameBody);
+    document.getElementById('wheelBtn').addEventListener('click', function () {
+      const stake = parseStake(document.getElementById('wheelStake'));
+      if (!stake) { toast('Enter a valid stake', 'lose'); return; }
+      const wheel = [0, 0.5, 1, 2, 3, 5];
+      const mult = wheel[Math.floor(Math.random() * wheel.length)];
+      const face = document.getElementById('wheelFace');
+      face.style.transform = 'rotate(' + (720 + Math.random() * 360) + 'deg)';
+      setTimeout(function () { face.style.transform = 'rotate(0deg)'; }, 800);
+      const payout = +(stake * mult).toFixed(2);
+      const net = +(payout - stake).toFixed(2);
+      balance += net; updateBalance();
+      addJackpot(stake * 0.02);
+      const $res = document.getElementById('wheelResult');
+      if (mult === 0) {
+        $res.textContent = '0× — lost ' + fmt(stake);
+        $res.style.color = '#fca5a5';
+        toast('No win', 'lose');
+        addHistory('Wheel · 0×', -stake);
+      } else if (mult === 1) {
+        $res.textContent = '1× — push';
+        $res.style.color = 'var(--gold)';
+        toast('Push');
+        addHistory('Wheel · 1× · PUSH', 0);
+      } else {
+        $res.textContent = mult + '× — YOU WIN +' + fmt(net);
+        $res.style.color = 'var(--emerald)';
+        toast('You win! +' + fmt(net), 'win');
+        addHistory('Wheel · ' + mult + '× · WIN', net);
+      }
+    });
+  }
+
+  /* HORSE */
+  function renderHorse() {
+    openModal('🐎 Virtual Horse');
+    const horses = ['🐎 Thunder', '🐴 Blaze', '🦄 Comet', '🐎 Storm'];
+    $gameBody.innerHTML = `
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick a runner. Win pays 4×.</p>
+      <div class="chip-row" style="margin-bottom:12px;flex-wrap:wrap;">
+        ${horses.map((h, i) => `<div class="chip ${i === 0 ? 'active' : ''}" data-horse="${i}" style="min-width:calc(50% - 3px);">${h}</div>`).join('')}
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;margin-bottom:12px;">
+        ${horses.map((h, i) => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:20px;">${h.split(' ')[0]}</span><div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;position:relative;"><div id="h${i}" style="position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--gold),var(--emerald));border-radius:3px;transition:width .3s;"></div></div></div>`).join('')}
+      </div>
+      <div id="horseResult" style="text-align:center;font-weight:700;font-size:14px;margin-bottom:12px;min-height:20px;"></div>
+      ${stakeControls('horse')}
+      <button class="btn btn-primary" id="horseBtn" type="button" style="width:100%;">🏁 RACE</button>
+    `;
+    wireChips($gameBody);
+    let pick = 0;
+    $gameBody.querySelectorAll('.chip[data-horse]').forEach(function (c) {
+      c.addEventListener('click', function () {
+        $gameBody.querySelectorAll('.chip[data-horse]').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        pick = +c.dataset.horse;
+      });
+    });
+    document.getElementById('horseBtn').addEventListener('click', function () {
+      const stake = parseStake(document.getElementById('horseStake'));
+      if (!stake) { toast('Enter a valid stake', 'lose'); return; }
+      const positions = [0, 0, 0, 0];
+      const winner = Math.floor(Math.random() * 4);
+      let ticks = 0;
+      const iv = setInterval(function () {
+        ticks++;
+        for (let i = 0; i < 4; i++) {
+          positions[i] = Math.min(100, positions[i] + Math.random() * (i === winner ? 9 : 6));
+          document.getElementById('h' + i).style.width = positions[i] + '%';
+        }
+        if (ticks > 20) {
+          clearInterval(iv);
+          document.getElementById('h' + winner).style.width = '100%';
+          addJackpot(stake * 0.02);
+          const $res = document.getElementById('horseResult');
+          if (winner === pick) {
+            const win = stake * 4;
+            const net = win - stake;
+            balance += net; updateBalance();
+            $res.textContent = '🏆 Winner: ' + horses[winner] + ' — YOU WIN +' + fmt(net);
+            $res.style.color = 'var(--emerald)';
+            toast('You win! +' + fmt(net), 'win');
+            addHistory('Horse · WIN', net);
+          } else {
+            balance -= stake; updateBalance();
+            $res.textContent = 'Winner: ' + horses[winner] + ' — Lost ' + fmt(stake);
+            $res.style.color = '#fca5a5';
+            toast('Lost ' + fmt(stake), 'lose');
+            addHistory('Horse · LOSS', -stake);
+          }
+        }
+      }, 100);
+    });
+  }
+
+  /* FOOTBALL */
+  function renderFootball() {
+    openModal('⚽ Virtual Football');
+    $gameBody.innerHTML = `
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Pick a side. Win pays 2×.</p>
+      <div style="text-align:center;font-size:60px;margin:16px 0;">⚽</div>
+      <div id="footResult" style="text-align:center;font-weight:700;font-size:15px;margin-bottom:12px;min-height:20px;"></div>
+      <div class="chip-row" style="margin-bottom:12px;">
+        <div class="chip active" data-team="home" style="border-color:rgba(16,185,129,0.4);">HOME</div>
+        <div class="chip" data-team="draw" style="border-color:rgba(245,197,66,0.4);">DRAW</div>
+        <div class="chip" data-team="away" style="border-color:rgba(239,68,68,0.4);">AWAY</div>
+      </div>
+      ${stakeControls('football')}
+      <button class="btn btn-primary" id="footBtn" type="button" style="width:100%;">⚽ KICK OFF</button>
+    `;
+    wireChips($gameBody);
+    let pick = 'home';
+    $gameBody.querySelectorAll('.chip[data-team]').forEach(function (c) {
+      c.addEventListener('click', function () {
+        $gameBody.querySelectorAll('.chip[data-team]').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        pick = c.dataset.team;
+      });
+    });
+    document.getElementById('footBtn').addEventListener('click', function () {
+      const stake = parseStake(document.getElementById('footballStake'));
+      if (!stake) { toast('Enter a valid stake', 'lose'); return; }
+      const hs = Math.floor(Math.random() * 4);
+      const as = Math.floor(Math.random() * 4);
+      const result = hs > as ? 'home' : hs < as ? 'away' : 'draw';
+      addJackpot(stake * 0.02);
+      const $res = document.getElementById('footResult');
+      if (result === pick) {
+        const win = stake * 2;
+        const net = win - stake;
+        balance += net; updateBalance();
+        $res.textContent = 'Final: ' + hs + '–' + as + ' · ' + result.toUpperCase() + ' — YOU WIN +' + fmt(net);
+        $res.style.color = 'var(--emerald)';
+        toast('You win! +' + fmt(net), 'win');
+        addHistory('Football · ' + result + ' · WIN', net);
+      } else {
+        balance -= stake; updateBalance();
+        $res.textContent = 'Final: ' + hs + '–' + as + ' · ' + result.toUpperCase() + ' — Lost ' + fmt(stake);
+        $res.style.color = '#fca5a5';
+        toast('Lost ' + fmt(stake), 'lose');
+        addHistory('Football · ' + result + ' · LOSS', -stake);
+      }
+    });
+  }
+
+  /* CRASH BALL */
+  function renderCrashBall() {
+    openModal('🎈 Crash Ball');
+    $gameBody.innerHTML = `
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:12px;">Watch the balloon grow. Cash out before it pops.</p>
+      <div style="text-align:center;font-size:80px;margin:20px 0;transition:transform .15s;" id="balloon">🎈</div>
+      <div id="ballMult" style="text-align:center;font-size:28px;font-weight:700;color:#fff;margin-bottom:12px;">1.00×</div>
+      <div id="ballResult" style="text-align:center;font-weight:700;font-size:14px;margin-bottom:12px;min-height:20px;"></div>
+      ${stakeControls('crashball')}
+      <div class="action-row">
+        <button class="btn btn-primary" id="ballStart" type="button">🎈 INFLATE</button>
+        <button class="btn btn-cashout" id="ballCash" type="button" disabled>💰 CASH OUT</button>
+      </div>
+    `;
+    wireChips($gameBody);
+    let mult = 1, running = false, cashed = false, stake = 0, iv = null;
+    document.getElementById('ballStart').addEventListener('click', function () {
+      if (running) return;
+      const s = parseStake(document.getElementById('crashballStake'));
+      if (!s) { toast('Enter a valid stake', 'lose'); return; }
+      stake = s; mult = 1; running = true; cashed = false;
+      balance -= stake; updateBalance(); addJackpot(stake * 0.02);
+      const crashAt = 1 + Math.random() * 9;
+      document.getElementById('ballStart').disabled = true;
+      document.getElementById('ballCash').disabled = false;
+      document.getElementById('ballResult').textContent = '';
+      const balloon = document.getElementById('balloon');
+      iv = setInterval(function () {
+        mult = +(mult + 0.05 + mult * 0.02).toFixed(2);
+        document.getElementById('ballMult').textContent = mult.toFixed(2) + '×';
+        balloon.style.transform = 'scale(' + (1 + (mult - 1) * 0.1) + ')';
+        if (mult >= crashAt) {
+          clearInterval(iv);
+          running = false;
+          document.getElementById('balloon').textContent = '💥';
+          document.getElementById('ballStart').disabled = false;
+          document.getElementById('ballCash').disabled = true;
+          if (!cashed) {
+            toast('Popped at ' + mult.toFixed(2) + '× — lost ' + fmt(stake), 'lose');
+            addHistory('CrashBall · popped @ ' + mult.toFixed(2) + '×', -stake);
+          }
+        }
+      }, 100);
+    });
+    document.getElementById('ballCash').addEventListener('click', function () {
+      if (!running || cashed) return;
+      cashed = true;
+      const win = +(stake * mult).toFixed(2);
+      balance += win; updateBalance();
+      document.getElementById('ballCash').disabled = true;
+      toast('Cashed out at ' + mult.toFixed(2) + '× — +' + fmt(win - stake), 'win');
+      addHistory('CrashBall · cashed @ ' + mult.toFixed(2) + '×', +(win - stake).toFixed(2));
+    });
+  }
+
+  /* JACKPOT */
+  function renderJackpot() {
+    openModal('💎 Daily Jackpot');
+    $gameBody.innerHTML = `
+      <div style="text-align:center;margin:20px 0;">
+        <div style="font-size:64px;">💎</div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.5);margin-top:6px;">Play-Money Jackpot Pool</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--gold);margin-top:4px;" id="jpPool">${fmt(jackpot)}</div>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);text-align:center;margin-bottom:16px;">
+        One entry. 5% chance to win the whole pool. Otherwise entry is returned as credit.
+      </p>
+      ${stakeControls('jackpot')}
+      <button class="btn btn-primary" id="jpBtn" type="button" style="width:100%;">💎 DRAW</button>
+      <div id="jpResult" style="text-align:center;font-weight:700;font-size:15px;margin-top:12px;min-height:20px;"></div>
+    `;
+    wireChips($gameBody);
+    document.getElementById('jpBtn').addEventListener('click', function () {
+      const stake = parseStake(document.getElementById('jackpotStake'));
+      if (!stake) { toast('Enter a valid stake', 'lose'); return; }
+      balance -= stake; updateBalance();
+      const won = Math.random() < 0.05;
+      const $res = document.getElementById('jpResult');
+      if (won) {
+        const prize = jackpot;
+        balance += prize; updateBalance();
+        jackpot = 1000; updateJackpot();
+        $res.textContent = '🎉 JACKPOT! +' + fmt(prize) + ' (pool resets)';
+        $res.style.color = 'var(--gold)';
+        toast('🎉 JACKPOT! +' + fmt(prize), 'win');
+        addHistory('Jackpot · WIN', prize);
+      } else {
+        balance += stake; updateBalance();
+        addJackpot(stake * 0.05);
+        $res.textContent = 'No jackpot — entry returned';
+        $res.style.color = 'rgba(255,255,255,0.6)';
+        toast('No jackpot');
+        addHistory('Jackpot · miss · PUSH', 0);
+      }
+      document.getElementById('jpPool').textContent = fmt(jackpot);
+    });
+  }
+
   const renders = {
-    rocket: renderRocket,
-    dice: renderDice,
-    coin: renderCoin,
-    spin: renderSpin,
-    color: renderColor,
-    keno: renderKeno,
+    rocket: renderRocket, dice: renderDice, coin: renderCoin,
+    spin: renderSpin, color: renderColor, keno: renderKeno,
+    wheel: renderWheel, horse: renderHorse, football: renderFootball,
+    crashball: renderCrashBall, jackpot: renderJackpot,
   };
   document.querySelectorAll('.game-card').forEach(function (card) {
     card.addEventListener('click', function () {
@@ -1069,19 +1841,20 @@ body {
     });
   });
 
-  /* ---------- Reset ---------- */
   document.getElementById('resetBtn').addEventListener('click', function () {
     balance = START_BALANCE;
+    jackpot = 1000;
     history.length = 0;
+    crashHistory = [];
     updateBalance();
+    updateJackpot();
     renderHistory();
-    toast('Demo reset to 10,000');
+    toast('Demo reset to 500');
   });
 
-  /* ---------- Init ---------- */
-  updateBalance();
-  renderHistory();
+  applyAuthMode();
+  enterApp();
 })();
 </script>
 </body>
-</html>
+   </html>
